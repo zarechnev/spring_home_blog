@@ -11,6 +11,7 @@ import org.zarechnev.blog.repository.BlogArticleRepository;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.zarechnev.blog.constant.ControllerPath.ADMIN_URL_PATH;
 import static org.zarechnev.blog.constant.ControllerPath.ARTICLE_URL_PATH;
 
@@ -33,7 +34,7 @@ public class MainController {
      * @param model   the model
      * @return string
      */
-    @RequestMapping("/")
+    @RequestMapping(value = "/", method = GET)
     public String main(HttpServletRequest request, Map<String, Object> model) {
         log.info("someone come to us with URL: " + request.getRequestURL());
         model.put("articles", msgRepo.findAll());
@@ -53,7 +54,7 @@ public class MainController {
      * @param model   the model
      * @return string
      */
-    @RequestMapping(ARTICLE_URL_PATH + "/{id}")
+    @RequestMapping(value = ARTICLE_URL_PATH + "/{id}", method = GET)
     public String articleById(HttpServletRequest request, @PathVariable("id") long id, Map<String, Object> model) {
         ArticleModel article;
 
@@ -79,7 +80,7 @@ public class MainController {
      * @param request the request
      * @return string
      */
-    @RequestMapping(ADMIN_URL_PATH)
+    @RequestMapping(value = ADMIN_URL_PATH, method = GET)
     public String adminPage(HttpServletRequest request){
         log.info("Someone come to us with URL: " + request.getRequestURL());
         return "administration";
@@ -91,7 +92,7 @@ public class MainController {
      * @param request the request
      * @return the string
      */
-    @RequestMapping("/foundation")
+    @RequestMapping(value = "/foundation", method = GET)
     public String foundation(HttpServletRequest request) {
         log.info("Someone come to us with URL: " + request.getRequestURL());
         return "foundation";
