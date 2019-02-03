@@ -1,0 +1,16 @@
+stages:
+  - build
+  - test
+  - analyze
+
+build:
+  stage: build
+  script: ./gradlew build
+
+test:
+  stage: test
+  script: ./gradlew test
+
+analyze:
+  stage: analyze
+  script: ./gradlew sonarqube -Dsonar.projectKey=dfgdf9g8d7fg9d87fgd97g -Dsonar.host.url=http://192.168.0.40 -Dsonar.login=f694c3a5e578fc0c3dd60c632580701138c4ec49
