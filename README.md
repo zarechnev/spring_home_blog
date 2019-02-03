@@ -20,10 +20,10 @@ java -jar ./build/libs/demo-0.0.1-SNAPSHOT.jar
 Go to http://localhost:8080. 
 
 ### Technology stack
-Thi project uses
+This project uses
 - Java 8
 - Spring Boot
 - Spring (MVC, Data/JPA)
 - gradle
 - Thymeleaf
-- H2-DB or MySQL/MariaDB 
+- H2-DB
