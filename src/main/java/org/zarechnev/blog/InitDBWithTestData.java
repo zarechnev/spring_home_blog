@@ -25,7 +25,7 @@ public class InitDBWithTestData {
      * Init.
      */
     @Bean
-    public void Init() {
+    public void initDB() {
         ArticleModel article;
         ArrayList<String> section;
 
