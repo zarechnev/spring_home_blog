@@ -14,10 +14,6 @@ buildscript {
 	}
 }
 
-task wrapper(type: Wrapper) {
-	gradleVersion = '4.10'
-}
-
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
