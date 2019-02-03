@@ -11,7 +11,7 @@ import java.time.*;
  */
 @Entity
 public class ArticleModel {
-    private final int SHORT_ARTICLE_LENGTH = 300;
+    private static final int SHORT_ARTICLE_LENGTH = 300;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -62,10 +62,10 @@ public class ArticleModel {
 
     /**
      * Return DateTime of last edit.
-     * TODO: Think about good view on site.
      *
      * @return last edit date time
      */
+    // TODO: Think about good view on site.
     public LocalDateTime getLastEditDateTime() {
         ZoneId zoneId = ZoneId.systemDefault();
         if (this.editedDate != null && this.editedDate.atZone(zoneId).toEpochSecond() > this.createDate.atZone(zoneId).toEpochSecond())
