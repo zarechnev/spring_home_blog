@@ -65,8 +65,8 @@ public class ArticleModel {
      *
      * @return last edit date time
      */
-    // TODO: Think about good view on site.
     public LocalDateTime getLastEditDateTime() {
+        // TODO: Think about good view on site.
         ZoneId zoneId = ZoneId.systemDefault();
         if (this.editedDate != null && this.editedDate.atZone(zoneId).toEpochSecond() > this.createDate.atZone(zoneId).toEpochSecond())
             return this.editedDate;
