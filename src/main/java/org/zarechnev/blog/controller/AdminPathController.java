@@ -6,7 +6,7 @@ import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.zarechnev.blog.repository.ArticleSectionRepository;
-import org.zarechnev.blog.repository.BlogArticleRepository;
+import org.zarechnev.blog.repository.ArticleRepository;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -19,7 +19,7 @@ import static org.zarechnev.blog.constant.ControllerPathURLs.ADMIN_URL_PATH;
 @Controller
 public class AdminPathController {
     @Autowired
-    private BlogArticleRepository msgRepo;
+    private ArticleRepository msgRepo;
 
     @Autowired
     private ArticleSectionRepository articleSectionRepo;

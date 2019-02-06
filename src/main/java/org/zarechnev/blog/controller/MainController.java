@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.zarechnev.blog.entity.ArticleModel;
-import org.zarechnev.blog.repository.BlogArticleRepository;
+import org.zarechnev.blog.repository.ArticleRepository;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
@@ -20,7 +20,7 @@ import static org.zarechnev.blog.constant.ControllerPathURLs.ARTICLE_URL_PATH;
 @Controller
 public class MainController {
     @Autowired
-    private BlogArticleRepository msgRepo;
+    private ArticleRepository msgRepo;
 
     @Autowired
     private Environment env;

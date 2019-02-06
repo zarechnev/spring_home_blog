@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 import org.zarechnev.blog.entity.ArticleModel;
 import org.zarechnev.blog.entity.ArticleSectionModel;
 import org.zarechnev.blog.repository.ArticleSectionRepository;
-import org.zarechnev.blog.repository.BlogArticleRepository;
+import org.zarechnev.blog.repository.ArticleRepository;
 import java.util.ArrayList;
 
 /**
@@ -15,7 +15,7 @@ import java.util.ArrayList;
 @Component
 public class InitDBWithTestData {
     @Autowired
-    private BlogArticleRepository articleRepo;
+    private ArticleRepository articleRepo;
     @Autowired
     private ArticleSectionRepository sectionRepo;
 

@@ -6,5 +6,5 @@ import org.zarechnev.blog.entity.ArticleModel;
 /**
  * The interface Blog article repository.
  */
-public interface BlogArticleRepository extends CrudRepository<ArticleModel, Long> {
+public interface ArticleRepository extends CrudRepository<ArticleModel, Long> {
 }

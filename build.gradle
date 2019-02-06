@@ -22,6 +22,11 @@ apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
+apply plugin: 'jacoco'
+
+jacoco {
+	toolVersion = "0.8.2"
+}
 
 group = 'org.zarechnev.blog'
 version = '0.0.1-SNAPSHOT'
@@ -46,4 +51,29 @@ dependencies {
 	runtimeOnly('com.h2database:h2')
 	testImplementation('org.springframework.boot:spring-boot-starter-test')
 	compileOnly 'org.projectlombok:lombok:1.18.4'
+}
+
+jacocoTestReport {
+	reports {
+		xml.enabled true
+	}
+}
+
+task printTotalCoverage(dependsOn: 'jacocoTestReport') {
+	doLast {
+		def testReportFile = project.file("${project.buildDir}/reports/jacoco/test/jacocoTestReport.xml")
+		if (testReportFile.exists()) {
+			def rootNode = new XmlParser(false, false).parseText(testReportFile.text.replaceAll("<!DOCTYPE[^>]*>", ""))
+			def totalCovered = 0
+			def totalMissed = 0
+			rootNode.counter.each { counter ->
+				try {
+					totalCovered += Integer.valueOf(counter.@covered as String)
+					totalMissed += Integer.valueOf(counter.@missed as String)
+				} catch (ignore) {}
+			}
+			// Test coverage parsing regex: Total:\s[\d\.\,]+%
+			println "Coverage Total: ${String.format('%.2f', 100.0 * totalCovered / (totalMissed + totalCovered))}%"
+		}
+	}
 }
