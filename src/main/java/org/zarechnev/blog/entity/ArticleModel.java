@@ -1,4 +1,4 @@
-package org.zarechnev.blog.model;
+package org.zarechnev.blog.entity;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -43,13 +43,13 @@ public class ArticleModel {
     private Boolean visible = true;
 
     /**
-     * Instantiates a new Article model.
+     * Instantiates a new Article entity.
      */
     public ArticleModel() {
     }
 
     /**
-     * Instantiates a new Article model.
+     * Instantiates a new Article entity.
      *
      * @param articleAuthor the article author
      * @param articleTitle  the article title

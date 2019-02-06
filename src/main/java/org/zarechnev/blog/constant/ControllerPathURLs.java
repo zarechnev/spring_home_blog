@@ -1,22 +1,14 @@
 package org.zarechnev.blog.constant;
 
-/**
- * The type Controller path.
- */
-public class ControllerPath {
-
+public class ControllerPathURLs {
     /**
      * Disable instantiate class.
      */
-    private ControllerPath(){}
+    private ControllerPathURLs(){}
 
-    /**
-     * The constant ARTICLE_URL_PATH.
-     */
     public final static String ARTICLE_URL_PATH = "/article";
 
-    /**
-     * The constant ADMIN_URL_PATH.
-     */
     public final static String ADMIN_URL_PATH = "/admin";
+
+    public final static String AUTHORIZE_URL_PATH = "/auth";
 }

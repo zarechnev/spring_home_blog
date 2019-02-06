@@ -1,7 +1,7 @@
 package org.zarechnev.blog.repository;
 
 import org.springframework.data.repository.CrudRepository;
-import org.zarechnev.blog.model.ArticleModel;
+import org.zarechnev.blog.entity.ArticleModel;
 
 /**
  * The interface Blog article repository.

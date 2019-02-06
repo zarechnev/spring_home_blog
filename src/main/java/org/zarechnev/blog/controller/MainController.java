@@ -6,13 +6,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.zarechnev.blog.model.ArticleModel;
+import org.zarechnev.blog.entity.ArticleModel;
 import org.zarechnev.blog.repository.BlogArticleRepository;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
-import static org.zarechnev.blog.constant.ControllerPath.ADMIN_URL_PATH;
-import static org.zarechnev.blog.constant.ControllerPath.ARTICLE_URL_PATH;
+import static org.zarechnev.blog.constant.ControllerPathURLs.ARTICLE_URL_PATH;
 
 /**
  * The type Main controller.
@@ -30,7 +29,7 @@ public class MainController {
      * Main WEB-Page.
      *
      * @param request the request
-     * @param model   the model
+     * @param model   the entity
      * @return string
      */
     @GetMapping("/")
@@ -50,7 +49,7 @@ public class MainController {
      *
      * @param request the request
      * @param id      the id
-     * @param model   the model
+     * @param model   the entity
      * @return string
      */
     @GetMapping(value = ARTICLE_URL_PATH + "/{id}")
@@ -71,18 +70,6 @@ public class MainController {
         model.put("siteUrl", env.getProperty("site.url"));
 
         return "oneArticle";
-    }
-
-    /**
-     * Admin page.
-     *
-     * @param request the request
-     * @return string
-     */
-    @GetMapping(ADMIN_URL_PATH)
-    public String adminPage(HttpServletRequest request){
-        log.info("Someone come to us with URL: " + request.getRequestURL());
-        return "administration";
     }
 
     /**

@@ -1,4 +1,4 @@
-package org.zarechnev.blog.model;
+package org.zarechnev.blog.entity;
 
 import javax.persistence.*;
 
@@ -19,12 +19,12 @@ public class ArticleSectionModel {
     public String section;
 
     /**
-     * Instantiates a new Article section model.
+     * Instantiates a new Article section entity.
      */
     protected ArticleSectionModel(){}
 
     /**
-     * Instantiates a new Article section model.
+     * Instantiates a new Article section entity.
      *
      * @param section the section
      */
