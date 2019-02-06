@@ -10,7 +10,10 @@ import org.zarechnev.blog.repository.ArticleRepository;
 
 import javax.servlet.http.HttpServletRequest;
 
+import java.util.Map;
+
 import static org.zarechnev.blog.constant.ControllerPathURLs.ADMIN_URL_PATH;
+import static org.zarechnev.blog.constant.ControllerPathURLs.ARTICLE_URL_PATH;
 
 /**
  * The controller for admin path.
@@ -28,14 +31,29 @@ public class AdminPathController {
     private Environment env;
 
     /**
-     * Admin page.
+     * Main Admin page.
      *
      * @param request the request
      * @return string
      */
     @GetMapping(ADMIN_URL_PATH)
-    public String adminPage(HttpServletRequest request){
+    public String mainAdminPage(HttpServletRequest request){
         log.info("Someone come to us with URL: " + request.getRequestURL());
+
         return "administration";
+    }
+
+    /**
+     * Admin page for Articles.
+     *
+     * @param request the request
+     * @return string
+     */
+    @GetMapping(ADMIN_URL_PATH + ARTICLE_URL_PATH)
+    public String adminPage(HttpServletRequest request, Map<String, Object> model){
+        log.info("Someone come to us with URL: " + request.getRequestURL());
+        model.put("articles", msgRepo.findAll());
+
+        return "administration_articles";
     }
 }
