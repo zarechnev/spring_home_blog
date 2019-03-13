@@ -29,7 +29,7 @@ jacoco {
 }
 
 group = 'org.zarechnev.blog'
-version = '0.0.1-SNAPSHOT'
+version = '0.0.1'
 sourceCompatibility = 1.8
 
 repositories {
@@ -38,8 +38,9 @@ repositories {
 
 jar {
 	manifest {
-		attributes('Main-Class': 'demo.DemoApplication')
+		attributes('Main-Class': 'org.zarechnev.blog.WebBlogApplication')
 	}
+	enabled=true
 }
 
 dependencies {
