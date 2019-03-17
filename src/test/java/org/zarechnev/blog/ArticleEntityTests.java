@@ -15,6 +15,9 @@ public class ArticleEntityTests {
 	@Autowired
 	private ArticleRepository articleRepo;
 
+	/**
+	 * Test for Instiate
+	 */
 	@Test
 	public void creatingArticle() {
 		ArticleModel article = new ArticleModel("TestAuthor", "TestArticleTitle");
