@@ -1,6 +1,7 @@
 package org.zarechnev.blog.entity;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -10,12 +11,13 @@ import java.time.*;
  * DB entity for article.
  */
 @Entity
+@NoArgsConstructor
 public class ArticleModel {
     private static final int SHORT_ARTICLE_LENGTH = 300;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Setter @Getter
+    @Getter
     private long id;
 
     @Column(name = "author")
@@ -44,12 +46,6 @@ public class ArticleModel {
 
     /**
      * Instantiates a new Article entity.
-     */
-    public ArticleModel() {
-    }
-
-    /**
-     * Instantiates a new Article entity.
      *
      * @param articleAuthor the article author
      * @param articleTitle  the article title
@@ -74,7 +70,7 @@ public class ArticleModel {
     }
 
     /**
-     * Return shot path of article to show on main page.
+     * Return short part of article to show on main page.
      *
      * @return abstract
      */

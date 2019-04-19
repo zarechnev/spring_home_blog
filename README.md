@@ -12,7 +12,7 @@ as
 ```
 git clone https://github.com/zarechnev/spring_home_blog.git
 cd ./spring_home_blog
-nano ./spring_home_blog/src/main/resources/application.properties
+nano ./spring_home_blog/src/main/resources/application.yml
 ./gradlew build
 java -jar ./build/libs/demo-0.0.1-SNAPSHOT.jar
 ```
@@ -27,3 +27,9 @@ This project uses
 - gradle
 - Thymeleaf
 - H2-DB
+
+------
+## ToDo
+- markdown support (?)
+- html base template for extends in pages
+- authorization

@@ -4,7 +4,8 @@ public class ControllerPathURLs {
     /**
      * Disable instantiate class.
      */
-    private ControllerPathURLs(){}
+    private ControllerPathURLs() {
+    }
 
     public final static String ARTICLE_URL_PATH = "/article";
 

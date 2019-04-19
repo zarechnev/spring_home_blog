@@ -1,27 +1,52 @@
 <!doctype html>
-<html class="no-js" lang="en" dir="ltr">
-  <head>
+<html class="no-js" lang="en" dir="ltr" xmlns:th="http://www.thymeleaf.org">
+<head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Foundation for Sites</title>
     <link rel="stylesheet" href="/css/foundation.css">
     <link rel="stylesheet" href="/css/app.css">
-  </head>
-  <body>
-    <div class="grid-container">
-      <div class="grid-x grid-padding-x">
+</head>
+<body>
+<div class="grid-container">
+    <div class="grid-x grid-padding-x">
         <div class="large-12 cell">
-          <h1>Article Admin page.</h1>
+            <h1>Article Admin page.</h1>
         </div>
 
+        <table border="1">
+            <caption>Статьи</caption>
+            <tr>
+                <th>Выбрать</th>
+                <th>Заголовок</th>
+                <th>Опубликована</th>
+                <th>Дата последней правки</th>
+                <th>Количество комментариев</th>
+            </tr>
 
+            <th:block th:each="article: ${articles}">
+            <tr>
+                <td><input type="checkbox"></td>
+                <td>
+                    <a th:href="${siteUrl}+${articleUrlPath}+'/'+${article.getId()}" rel="bookmark">
+                        <h4 th:text="${article.getArticleTitle()}">article title</h4>
+                    </a>
+                </td>
+                <td><input type="checkbox"></td>
+                <td>
+                    <span th:text="${article.getLastEditDateTime()}">last edit article date</span>
+                </td>
+                <td>31,5</td>
+            </tr>
+            </th:block>
+        </table>
 
-
-      </div>
+    </div>
+    </div>
     <script src="/js/vendor/jquery.js"></script>
     <script src="/js/vendor/what-input.js"></script>
     <script src="/js/vendor/foundation.js"></script>
     <script src="/js/app.js"></script>
-  </body>
+</body>
 </html>

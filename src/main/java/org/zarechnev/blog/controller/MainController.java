@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.zarechnev.blog.entity.ArticleModel;
 import org.zarechnev.blog.repository.ArticleRepository;
+
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
@@ -58,8 +59,7 @@ public class MainController {
 
         if (msgRepo.findById(id).isPresent()) {
             article = msgRepo.findById(id).get();
-        }
-        else {
+        } else {
             log.warn(request.getRequestURL() + " does not exist!");
             return "redirect:" + env.getProperty("site.url");
         }

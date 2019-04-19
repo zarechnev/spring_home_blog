@@ -37,7 +37,7 @@ public class AdminPathController {
      * @return string
      */
     @GetMapping(ADMIN_URL_PATH)
-    public String mainAdminPage(HttpServletRequest request){
+    public String mainAdminPage(HttpServletRequest request) {
         log.info("Someone come to us with URL: " + request.getRequestURL());
 
         return "administration";
@@ -50,9 +50,11 @@ public class AdminPathController {
      * @return string
      */
     @GetMapping(ADMIN_URL_PATH + ARTICLE_URL_PATH)
-    public String adminPage(HttpServletRequest request, Map<String, Object> model){
+    public String adminPage(HttpServletRequest request, Map<String, Object> model) {
         log.info("Someone come to us with URL: " + request.getRequestURL());
         model.put("articles", msgRepo.findAll());
+        model.put("articleUrlPath", ARTICLE_URL_PATH);
+        model.put("siteUrl", env.getProperty("site.url"));
 
         return "administration_articles";
     }
