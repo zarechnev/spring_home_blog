@@ -40,7 +40,7 @@ public class AdminPathController {
     public String mainAdminPage(HttpServletRequest request) {
         log.info("Someone come to us with URL: " + request.getRequestURL());
 
-        return "administration";
+        return "admin/administration";
     }
 
     /**
@@ -56,6 +56,6 @@ public class AdminPathController {
         model.put("articleUrlPath", ARTICLE_URL_PATH);
         model.put("siteUrl", env.getProperty("site.url"));
 
-        return "administration_articles";
+        return "admin/administration_articles";
     }
 }
