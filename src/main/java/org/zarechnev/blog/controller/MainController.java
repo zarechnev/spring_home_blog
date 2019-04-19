@@ -11,6 +11,7 @@ import org.zarechnev.blog.repository.ArticleRepository;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
+import java.util.Optional;
 
 import static org.zarechnev.blog.constant.ControllerPathURLs.ARTICLE_URL_PATH;
 
@@ -55,17 +56,15 @@ public class MainController {
      */
     @GetMapping(value = ARTICLE_URL_PATH + "/{id}")
     public String articleById(HttpServletRequest request, @PathVariable("id") long id, Map<String, Object> model) {
-        ArticleModel article;
+        Optional<ArticleModel> article = msgRepo.findById(id);
 
-        if (msgRepo.findById(id).isPresent()) {
-            article = msgRepo.findById(id).get();
-        } else {
+        if (!article.isPresent()) {
             log.warn(request.getRequestURL() + " does not exist!");
             return "redirect:" + env.getProperty("site.url");
         }
 
         log.info("someone come to us with URL: " + request.getRequestURL());
-        model.put("article", article);
+        model.put("article", article.get());
         model.put("articleUrlPath", ARTICLE_URL_PATH);
         model.put("siteUrl", env.getProperty("site.url"));
 
