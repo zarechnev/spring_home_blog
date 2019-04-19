@@ -29,7 +29,7 @@ This project uses
 - H2-DB
 
 ------
-## ToDo
+### ToDo
 - markdown support (?)
 - html base template for extends in pages
 - authorization

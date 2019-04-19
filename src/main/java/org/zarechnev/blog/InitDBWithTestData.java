@@ -28,7 +28,7 @@ public class InitDBWithTestData {
     @Bean
     public void initDB() {
         ArrayList<ArticleModel> articles = (ArrayList<ArticleModel>) articleRepo.findAll();
-        if (articles != null && articles.isEmpty()) {
+        if (articles.isEmpty()) {
 
             ArticleModel article;
             ArrayList<String> section;

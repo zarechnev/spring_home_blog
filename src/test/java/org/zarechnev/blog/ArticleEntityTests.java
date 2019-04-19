@@ -23,7 +23,7 @@ public class ArticleEntityTests {
 		ArticleModel article = new ArticleModel("TestAuthor", "TestArticleTitle");
 		articleRepo.save(article);
 
-		Assert.assertEquals(article.getAuthor(), "TestAuthor");
-		Assert.assertEquals(article.getArticleTitle(), "TestArticleTitle");
+		Assert.assertEquals("TestAuthor", article.getAuthor());
+		Assert.assertEquals("TestArticleTitle", article.getArticleTitle());
 	}
 }

@@ -1,1 +1,0 @@
--) Set project name in spring profile. And use it.
