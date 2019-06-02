@@ -49,14 +49,11 @@ public class CommentsModel {
     }
 
     /**
-     * Return short part of article to show on main page.
+     * Return short part of comment to show on main page.
      *
      * @return abstract
      */
     public String getAbstractComment() {
-        return this.getCommentBody().substring(
-                0,
-                this.SHORT_COMMENT_LENGTH > this.getCommentBody().length() ? this.getCommentBody().length() : this.SHORT_COMMENT_LENGTH
-                ) + " ...";
+        return this.getCommentBody().substring(0, this.SHORT_COMMENT_LENGTH) + " ...";
     }
 }

@@ -77,7 +77,9 @@ public class ArticleModel {
      * @return abstract
      */
     public String getAbstract() {
-        return this.articleBody.substring(0, this.SHORT_ARTICLE_LENGTH) + " . . .";
+        return this.getArticleBody().substring(0,
+                this.SHORT_ARTICLE_LENGTH > this.getArticleBody().length() ? this.getArticleBody().length() : this.SHORT_ARTICLE_LENGTH
+        ) + " ...";
     }
 
     @Override
