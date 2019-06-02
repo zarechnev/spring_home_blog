@@ -48,9 +48,10 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-thymeleaf')
 	compile(group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.11.1')
 	compile(group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.11.1')
+	compile(group: 'org.postgresql', name: 'postgresql', version: '42.1.4')
 	runtimeOnly('com.h2database:h2')
 	testImplementation('org.springframework.boot:spring-boot-starter-test')
-	compileOnly 'org.projectlombok:lombok:1.18.4'
+	compileOnly('org.projectlombok:lombok:1.18.4')
 }
 
 jacocoTestReport {
