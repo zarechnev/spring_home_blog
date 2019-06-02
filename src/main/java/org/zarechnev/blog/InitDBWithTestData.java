@@ -4,11 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 import org.zarechnev.blog.entity.ArticleModel;
-import org.zarechnev.blog.entity.ArticleSectionModel;
-import org.zarechnev.blog.repository.ArticleSectionRepository;
+import org.zarechnev.blog.entity.SectionModel;
+import org.zarechnev.blog.repository.SectionRepository;
 import org.zarechnev.blog.repository.ArticleRepository;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Component for init DataBase with test data.
@@ -18,7 +17,7 @@ public class InitDBWithTestData {
     @Autowired
     private ArticleRepository articleRepo;
     @Autowired
-    private ArticleSectionRepository sectionRepo;
+    private SectionRepository sectionRepo;
 
     private InitDBWithTestData() { }
 
@@ -39,7 +38,7 @@ public class InitDBWithTestData {
             section.add("Разное");
             section.add("Политика");
             for (String i : section) {
-                this.sectionRepo.save(new ArticleSectionModel(i));
+                this.sectionRepo.save(new SectionModel(i));
             }
 
             for (int i = 0; i < 3; i++) {

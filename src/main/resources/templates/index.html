@@ -1,140 +1,32 @@
 <!DOCTYPE html>
-<html class="no-js" lang="en" dir="ltr" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:include="~{fragments/top :: top}"></head>
-<body class="home blog hfeed">
-<div id="page" class="site">
-    <!-- Preloader Start -->
-    <div class="preloader" style="display: none;">
-        <div class="rounder"></div>
-    </div>
-    <!-- Preloader End -->
-
-    <!-- Popup Search Box Start -->
-    <div class="header-search open-search">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1">
-                    <div class="navbar-search">
-                        <form role="search" id="searchform" class="search-global searchform" method="get"
-                              action="http://uipasta.com/live-preview/write-theme/">
-                            <input name="s" id="s" class="search-global-input" placeholder="Type your search"
-                                   type="search">
-                            <button type="submit" id="searchsubmit" class="search-global-btn"><i
-                                    class="icon-magnifier"></i></button>
-                            <div class="search-global-note">Type your search above and then press to enter or click on
-                                icon
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <button type="button" class="search-close close"><i class="fa fa-times"></i></button>
-    </div>
-    <!-- Popup Search Box End -->
-
-    <div id="main">
-        <div class="container">
-            <div class="row">
-
-                <div class="container">
-                    <div class="row">
-
-                        <!-- Content Start -->
-                        <div class="col-md-10 col-md-offset-1">
-                            <div class="col-md-12 page-body">
-                                <div class="row">
-                                    <div class="sub-title">
-                                        <a th:href="${siteUrl}" rel="bookmark"><h1 style="font-size: 24px;">Хобби,
-                                            увлечения, статьи</h1></a>
-                                        <a href="#" class="btn-header-search"><i class="icon-magnifier"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-10 col-md-offset-1">
-                            <div class="col-md-12 page-body">
-                                <div class="row">
-
-                                    <div class="col-md-12 content-page">
-                                        <div class="col-md-12 blog-post" style="display: block;">
-
-                                            <th:block th:each="article: ${articles}">
-                                                <!-- #post -->
-                                                <article
-                                                        class="post type-post status-publish format-standard hentry category-web-design">
-                                                    <div class="post-title">
-                                                        <a th:href="${siteUrl}+${articleUrlPath}+'/'+${article.getId()}"
-                                                           rel="bookmark"><h2 style="font-size:35px;"
-                                                                              th:text="${article.getArticleTitle()}">
-                                                            article title</h2></a>
-
-                                                        <div class="post-info"><span
-                                                                th:text="${article.getLastEditDateTime()}">last edit article date</span>
-                                                        </div>
-                                                    </div>
-
-                                                    <p th:text="${article.getAbstract()}">shot top part of article</p>
-
-                                                    <a th:href="${siteUrl}+${articleUrlPath}+'/'+${article.getId()}"
-                                                       class="button button-style button-anim fa fa-long-arrow-right"><span>Подробнее . . .</span></a>
-                                                </article>
-                                                <!-- #post -->
-                                            </th:block>
-
-                                            <div class="pagination text-center">
-                                                <span aria-current="page" class="page-numbers current">1</span>
-                                                <a class="page-numbers"
-                                                   href="http://uipasta.com/live-preview/write-theme/page/2/">2</a>
-                                                <a class="next page-numbers"
-                                                   href="http://uipasta.com/live-preview/write-theme/page/2/"><span>Next</span></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Subscribe Form Start -->
-                <div class="col-md-10 col-md-offset-1">
-                    <div class="col-md-12 page-body">
-                        <div class="col-md-8 col-md-offset-2">
-                            <form id="mc-form" method="post"
-                                  action="http://uipasta.us15.list-manage.com/subscribe/post?u=35ae345d2cc8ceed7b9542abb&amp;id=24cbd58a39"
-                                  novalidate="true">
-
-                                <div class="subscribe-form margin-top-20">
-                                    <input id="mc-email" placeholder="Email Address" class="text-input" name="EMAIL"
-                                           type="email">
-                                    <button class="submit-btn" type="submit">Submit</button>
-                                </div>
-                                <p>Subscribe to our weekly newsletter</p>
-                                <label for="mc-email" class="mc-label"></label>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                <!-- Subscribe Form End -->
-
-                <div class="col-md-12 page-body footer"><!-- #content -->
-                    <footer>
-                        <div class="uipasta-credit">Design By <a href="http://www.uipasta.com/"
-                                                                 target="_blank">UiPasta</a></div>
-                    </footer><!-- #colophon -->
-                </div><!-- #page -->
-            </div>
+<body>
+<th:block th:include="~{fragments/navigation :: navigation}"></th:block>
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h3>Хобби, увлечения, статьи</h3>
+            <hr>
         </div>
     </div>
-
-    <div th:include="~{fragments/botom :: botom}"></div>
-
+    <div class="row">
+        <div class="col">
+            <th:block th:each="article: ${articles}">
+                <h4 th:text="${article.getArticleTitle()}">article title</h4>
+                <p th:text="${article.getAbstract()}">shot top part of article</p>
+                <div class="alert alert-light" role="alert">
+                    <a th:href="${siteUrl}+${articleUrlPath}+'/'+${article.getId()}"><span>Подробнее</span></a>
+                </div>
+            </th:block>
+        </div>
+        <div class="col-3 bg-light">
+            <h5>Темы</h5>
+        </div>
+    </div>
+    <hr>
+    <div class="credit">Design By Zarechnev Ruslan</div>
 </div>
+<div th:include="~{fragments/bottom :: bottom}"></div>
 </body>
 </html>

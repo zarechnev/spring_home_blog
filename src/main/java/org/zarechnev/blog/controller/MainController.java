@@ -36,7 +36,7 @@ public class MainController {
      */
     @GetMapping("/")
     public String main(HttpServletRequest request, Map<String, Object> model) {
-        log.info("someone come to us with URL: " + request.getRequestURL());
+        log.info("Client with IP {} come to to URL {}", request.getRemoteAddr(), request.getRequestURL());
         model.put("articles", msgRepo.findAll());
         model.put("articleUrlPath", ARTICLE_URL_PATH);
         model.put("siteUrl", env.getProperty("site.url"));
@@ -59,27 +59,15 @@ public class MainController {
         Optional<ArticleModel> article = msgRepo.findById(id);
 
         if (!article.isPresent()) {
-            log.warn(request.getRequestURL() + " does not exist!");
+            log.warn("Client with IP {} try to open missing page with URL {}", request.getRemoteAddr(), request.getRequestURL());
             return "redirect:" + env.getProperty("site.url");
         }
 
-        log.info("someone come to us with URL: " + request.getRequestURL());
+        log.info("Client with IP {} come to to URL {}", request.getRemoteAddr(), request.getRequestURL());
         model.put("article", article.get());
         model.put("articleUrlPath", ARTICLE_URL_PATH);
         model.put("siteUrl", env.getProperty("site.url"));
 
         return "oneArticle";
-    }
-
-    /**
-     * Foundation template for HTML markup.
-     *
-     * @param request the request
-     * @return the string
-     */
-    @GetMapping("/foundation")
-    public String foundation(HttpServletRequest request) {
-        log.info("Someone come to us with URL: " + request.getRequestURL());
-        return "foundation";
     }
 }

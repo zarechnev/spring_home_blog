@@ -1,16 +1,14 @@
 <!doctype html>
-<html class="no-js" lang="en" dir="ltr" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:include="~{fragments/top :: top}"></head>
 <body>
-<div class="grid-container">
-    <div class="grid-x grid-padding-x">
-        <div class="large-12 cell">
-            <h1>Admin page.</h1>
-        </div>
-    </div>
-
-    <div th:include="~{fragments/botom :: botom}"></div>
-
+<th:block th:include="~{fragments/navigation :: navigation}"></th:block>
+<div class="container">
+    <h1>Admin page</h1>
+    <hr>
+    <h2><a href="/admin/article">Статьи</a></h2>
+    <h2><a href="/admin/user">Пользователи</a></h2>
 </div>
+<div th:include="~{fragments/bottom :: bottom}"></div>
 </body>
 </html>

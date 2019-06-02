@@ -27,7 +27,7 @@ public class AuthorizationController {
      */
     @GetMapping(AUTHORIZE_URL_PATH)
     public String authPage(HttpServletRequest request){
-        log.info("Someone come to us with URL: " + request.getRequestURL());
+        log.info("Client with IP {} come to to URL {}", request.getRemoteAddr(), request.getRequestURL());
         return "authorization";
     }
 }

@@ -72,6 +72,8 @@ public class ArticleModel {
     /**
      * Return short part of article to show on main page.
      *
+     * TODO Возвращать определённое количество слов, и проверять на общюю длинну
+     *
      * @return abstract
      */
     public String getAbstract() {

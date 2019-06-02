@@ -22,14 +22,14 @@ Go to http://localhost:8080.
 ### Technology stack
 This project uses
 - Java 8
-- Spring Boot
-- Spring (MVC, Data/JPA)
+- Spring (Boot, MVC, Data/JPA
 - gradle
 - Thymeleaf
 - H2-DB
 
-------
 ### ToDo
-- markdown support (?)
-- html base template for extends in pages
 - authorization
+- admin page for users
+- admin page for articles
+- markdown support (?)
+- ~~html base template for extends in pages~~

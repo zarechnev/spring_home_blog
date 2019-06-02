@@ -1,10 +1,10 @@
 package org.zarechnev.blog.repository;
 
 import org.springframework.data.repository.CrudRepository;
-import org.zarechnev.blog.entity.ArticleSectionModel;
+import org.zarechnev.blog.entity.SectionModel;
 
 /**
  * The interface Article section repository.
  */
-public interface ArticleSectionRepository extends CrudRepository<ArticleSectionModel, Integer> {
+public interface SectionRepository extends CrudRepository<SectionModel, Integer> {
 }

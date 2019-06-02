@@ -6,8 +6,8 @@ import javax.persistence.*;
  * Section of articles.
  */
 @Entity
-@SequenceGenerator(name="seq", initialValue=1, allocationSize=100)
-public class ArticleSectionModel {
+@SequenceGenerator(name="seq", allocationSize=100)
+public class SectionModel {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq")
     private int id;
@@ -21,14 +21,14 @@ public class ArticleSectionModel {
     /**
      * Instantiates a new Article section entity.
      */
-    protected ArticleSectionModel(){}
+    protected SectionModel(){}
 
     /**
      * Instantiates a new Article section entity.
      *
      * @param section the section
      */
-    public ArticleSectionModel(String section){
+    public SectionModel(String section){
         this.section = section;
     }
 }

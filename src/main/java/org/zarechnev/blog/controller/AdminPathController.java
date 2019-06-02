@@ -5,27 +5,26 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.zarechnev.blog.repository.ArticleSectionRepository;
+import org.zarechnev.blog.repository.SectionRepository;
 import org.zarechnev.blog.repository.ArticleRepository;
 
 import javax.servlet.http.HttpServletRequest;
 
 import java.util.Map;
 
-import static org.zarechnev.blog.constant.ControllerPathURLs.ADMIN_URL_PATH;
-import static org.zarechnev.blog.constant.ControllerPathURLs.ARTICLE_URL_PATH;
+import static org.zarechnev.blog.constant.ControllerPathURLs.*;
 
 /**
  * The controller for admin path.
  */
 @Slf4j
-@Controller
+@Controller()
 public class AdminPathController {
     @Autowired
     private ArticleRepository msgRepo;
 
     @Autowired
-    private ArticleSectionRepository articleSectionRepo;
+    private SectionRepository articleSectionRepo;
 
     @Autowired
     private Environment env;
@@ -38,7 +37,7 @@ public class AdminPathController {
      */
     @GetMapping(ADMIN_URL_PATH)
     public String mainAdminPage(HttpServletRequest request) {
-        log.info("Someone come to us with URL: " + request.getRequestURL());
+        log.info("Client with IP {} come to to URL {}", request.getRemoteAddr(), request.getRequestURL());
 
         return "admin/administration";
     }
@@ -50,12 +49,30 @@ public class AdminPathController {
      * @return string
      */
     @GetMapping(ADMIN_URL_PATH + ARTICLE_URL_PATH)
-    public String adminPage(HttpServletRequest request, Map<String, Object> model) {
-        log.info("Someone come to us with URL: " + request.getRequestURL());
+    public String adminArticlesPage(HttpServletRequest request, Map<String, Object> model) {
+        log.info("Client with IP {} come to to URL {}", request.getRemoteAddr(), request.getRequestURL());
         model.put("articles", msgRepo.findAll());
         model.put("articleUrlPath", ARTICLE_URL_PATH);
         model.put("siteUrl", env.getProperty("site.url"));
 
         return "admin/administration_articles";
+    }
+
+    /**
+     * Admin page for Users.
+     *
+     * TODO реализовать!!!
+     *
+     * @param request the request
+     * @return string
+     */
+    @GetMapping(ADMIN_URL_PATH + USER_URL_PATH)
+    public String adminUsersPage(HttpServletRequest request, Map<String, Object> model) {
+        log.info("Client with IP {} come to to URL {}", request.getRemoteAddr(), request.getRequestURL());
+        model.put("articles", msgRepo.findAll());
+        model.put("articleUrlPath", ARTICLE_URL_PATH);
+        model.put("siteUrl", env.getProperty("site.url"));
+
+        return "admin/administration_users";
     }
 }
