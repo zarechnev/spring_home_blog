@@ -7,8 +7,8 @@ public class ControllerPathURLs {
     private ControllerPathURLs() {
     }
 
-    public final static String ARTICLE_URL_PATH = "/article";
-    public final static String USER_URL_PATH = "/user";
-    public final static String ADMIN_URL_PATH = "/admin";
-    public final static String AUTHORIZE_URL_PATH = "/auth";
+    public static final String ARTICLE_URL_PATH = "/article";
+    public static final String USER_URL_PATH = "/user";
+    public static final String ADMIN_URL_PATH = "/admin";
+    public static final String AUTHORIZE_URL_PATH = "/auth";
 }
