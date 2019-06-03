@@ -14,7 +14,8 @@ import java.util.Map;
 import java.util.Optional;
 
 import static org.zarechnev.blog.constant.ControllerPathURLs.ARTICLE_URL_PATH;
-import static org.zarechnev.blog.constant.LoggingConstant.loggingClientInfo;
+import static org.zarechnev.blog.constant.LoggingConstant.LOGGING_CLIENT_INFO;
+import static org.zarechnev.blog.constant.LoggingConstant.LOGGING_MISSING_PAGE_WARN;
 
 /**
  * The type Main controller.
@@ -37,7 +38,7 @@ public class MainController {
      */
     @GetMapping("/")
     public String main(HttpServletRequest request, Map<String, Object> model) {
-        log.info(loggingClientInfo, request.getRemoteAddr(), request.getRequestURL());
+        log.info(LOGGING_CLIENT_INFO, request.getRemoteAddr(), request.getRequestURL());
         model.put("articles", msgRepo.findAll());
         model.put("articleUrlPath", ARTICLE_URL_PATH);
         model.put("siteUrl", env.getProperty("site.url"));
@@ -60,11 +61,11 @@ public class MainController {
         Optional<ArticleModel> article = msgRepo.findById(id);
 
         if (!article.isPresent()) {
-            log.warn("Client with IP {} try to open missing page with URL {}", request.getRemoteAddr(), request.getRequestURL());
+            log.warn(LOGGING_MISSING_PAGE_WARN, request.getRemoteAddr(), request.getRequestURL());
             return "redirect:" + env.getProperty("site.url");
         }
 
-        log.info(loggingClientInfo, request.getRemoteAddr(), request.getRequestURL());
+        log.info(LOGGING_CLIENT_INFO, request.getRemoteAddr(), request.getRequestURL());
         model.put("article", article.get());
         model.put("articleUrlPath", ARTICLE_URL_PATH);
         model.put("siteUrl", env.getProperty("site.url"));

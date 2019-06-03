@@ -3,9 +3,9 @@
 <head th:include="~{fragments/top :: top}"></head>
 <body>
 <th:block th:include="~{fragments/navigation :: navigation}"></th:block>
-<div class="container">
+<div class="container" id="main_container">
     <div class="row">
-        <div class="col-12">
+        <div class="col">
             <h3>Хобби, увлечения, статьи</h3>
             <hr>
         </div>
@@ -15,7 +15,7 @@
             <th:block th:each="article: ${articles}">
                 <h4 th:text="${article.getArticleTitle()}">article title</h4>
                 <p th:text="${article.getAbstract()}">shot top part of article</p>
-                <div class="alert alert-light" role="alert">
+                <div class="alert alert-light mb-3" role="alert">
                     <a th:href="${siteUrl}+${articleUrlPath}+'/'+${article.getId()}"><span>Подробнее</span></a>
                 </div>
             </th:block>

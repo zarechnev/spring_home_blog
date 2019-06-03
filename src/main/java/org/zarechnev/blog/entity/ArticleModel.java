@@ -13,7 +13,7 @@ import java.time.*;
 @Entity
 @NoArgsConstructor
 public class ArticleModel {
-    private static final int SHORT_ARTICLE_LENGTH = 300;
+    private static final int SHORT_ARTICLE_LENGTH = 400;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

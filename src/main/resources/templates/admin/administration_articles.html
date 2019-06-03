@@ -9,40 +9,62 @@
     <div id="main">
         <div class="container">
             <div class="row">
-                <table border="1">
-                    <caption>Статьи</caption>
-                    <tr>
-                        <th>Выбрать</th>
-                        <th>Заголовок</th>
-                        <th>Опубликована</th>
-                        <th>Дата последней правки</th>
-                        <th>Количество комментариев</th>
-                    </tr>
+                <div class="col">
 
-                    <th:block th:each="article: ${articles}">
+                    <div class="alert alert-light" role="alert">
+                        <button type="button" class="btn btn-success my-2 my-sm-0 btn-sm">Добавить</button>
+                        <button type="button" class="btn btn-info my-2 my-sm-0 btn-sm">Редактировать</button>
+                        <button type="button" class="btn btn-danger my-2 my-sm-0 btn-sm">Удалить</button>
+                        <button type="button" class="btn btn-info my-2 my-sm-0 btn-sm">Комментарии</button>
+                    </div>
+
+                    <table class="table table-bordered table-hover table-sm">
+                        <thead>
                         <tr>
-                            <td><input type="checkbox"></td>
-                            <td>
-                                <a th:href="${siteUrl}+${articleUrlPath}+'/'+${article.getId()}" rel="bookmark">
-                                    <h4 th:text="${article.getArticleTitle()}">article title</h4>
-                                </a>
-                            </td>
-                            <td><input type="checkbox"></td>
-                            <td>
-                                <span th:text="${article.getLastEditDateTime()}">last edit article date</span>
-                            </td>
-                            <td>31,5</td>
+                            <th></th>
+                            <th>Название</th>
+                            <th>Публикация</th>
+                            <th>Раздел</th>
+                            <th>Просмотров</th>
+                            <th>Комментариев</th>
                         </tr>
-                    </th:block>
-                </table>
+                        </thead>
 
-                <!--
-                блок кнопок для управления статьями
-                -->
+                        <th:block th:each="article: ${articles}">
+                            <tr>
+                                <td><input type="checkbox"></td>
+                                <td>
+                                    <a th:href="${siteUrl}+${articleUrlPath}+'/'+${article.getId()}" rel="bookmark">
+                                        <span th:text="${article.getArticleTitle()}">article title</span>
+                                    </a>
+                                </td>
+                                <td><input type="checkbox"></td>
+                                <td>
+                                    <span th:text="${article.getLastEditDateTime()}">last edit article date</span>
+                                </td>
+                                <td>31</td>
+                                <td>31/<b>43</b></td>
+                            </tr>
+                        </th:block>
+                    </table>
 
-                <!--
-                блок для редактирования статей
-                -->
+                    <br>
+                    <form>
+                        <div class="form-group">
+                            <label for="formArticleTitle">Название статьи</label>
+                            <input type="text" class="form-control" id="formArticleTitle" placeholder="Название статьи">
+                        </div>
+                        <div class="form-group">
+                            <label for="formArticleBody">Статья</label>
+                            <textarea class="form-control" id="formArticleBody" rows="3"></textarea>
+                        </div>
+                    </form>
+
+                    <div class="alert alert-light" role="alert">
+                        <button type="button" class="btn btn-success my-2 my-sm-0 btn-sm">Сохранить</button>
+                    </div>
+
+                </div>
             </div>
         </div>
     </div>

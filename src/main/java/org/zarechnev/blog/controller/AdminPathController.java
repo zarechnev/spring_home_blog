@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
 import static org.zarechnev.blog.constant.ControllerPathURLs.*;
-import static org.zarechnev.blog.constant.LoggingConstant.loggingClientInfo;
+import static org.zarechnev.blog.constant.LoggingConstant.LOGGING_CLIENT_INFO;
 
 /**
  * The controller for admin path.
@@ -38,7 +38,7 @@ public class AdminPathController {
      */
     @GetMapping(ADMIN_URL_PATH)
     public String mainAdminPage(HttpServletRequest request) {
-        log.info(loggingClientInfo, request.getRemoteAddr(), request.getRequestURL());
+        log.info(LOGGING_CLIENT_INFO, request.getRemoteAddr(), request.getRequestURL());
 
         return "admin/administration";
     }
@@ -51,7 +51,7 @@ public class AdminPathController {
      */
     @GetMapping(ADMIN_URL_PATH + ARTICLE_URL_PATH)
     public String adminArticlesPage(HttpServletRequest request, Map<String, Object> model) {
-        log.info(loggingClientInfo, request.getRemoteAddr(), request.getRequestURL());
+        log.info(LOGGING_CLIENT_INFO, request.getRemoteAddr(), request.getRequestURL());
         model.put("articles", msgRepo.findAll());
         model.put("articleUrlPath", ARTICLE_URL_PATH);
         model.put("siteUrl", env.getProperty("site.url"));
@@ -69,7 +69,7 @@ public class AdminPathController {
      */
     @GetMapping(ADMIN_URL_PATH + USER_URL_PATH)
     public String adminUsersPage(HttpServletRequest request, Map<String, Object> model) {
-        log.info(loggingClientInfo, request.getRemoteAddr(), request.getRequestURL());
+        log.info(LOGGING_CLIENT_INFO, request.getRemoteAddr(), request.getRequestURL());
         model.put("articles", msgRepo.findAll());
         model.put("articleUrlPath", ARTICLE_URL_PATH);
         model.put("siteUrl", env.getProperty("site.url"));
