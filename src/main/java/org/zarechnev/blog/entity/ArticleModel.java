@@ -78,7 +78,7 @@ public class ArticleModel {
      */
     public String getAbstract() {
         return this.getArticleBody().substring(0,
-                this.SHORT_ARTICLE_LENGTH > this.getArticleBody().length() ? this.getArticleBody().length() : this.SHORT_ARTICLE_LENGTH
+                SHORT_ARTICLE_LENGTH > this.getArticleBody().length() ? this.getArticleBody().length() : SHORT_ARTICLE_LENGTH
         ) + " ...";
     }
 

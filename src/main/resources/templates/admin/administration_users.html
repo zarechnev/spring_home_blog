@@ -1,60 +1,12 @@
 <!doctype html>
-<html class="no-js" lang="en" dir="ltr" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:include="~{fragments/top :: top}"></head>
 <body>
 <th:block th:include="~{fragments/navigation :: navigation}"></th:block>
-<div class="grid-container">
-    <div class="grid-x grid-padding-x">
-        <div class="large-12 cell">
-            <h1>Article Admin page</h1>
-        </div>
-
-        <div id="main">
-            <div class="container">
-                <div class="row">
-
-                    <table border="1">
-                        <caption>Статьи</caption>
-                        <tr>
-                            <th>Выбрать</th>
-                            <th>Заголовок</th>
-                            <th>Опубликована</th>
-                            <th>Дата последней правки</th>
-                            <th>Количество комментариев</th>
-                        </tr>
-
-                        <th:block th:each="article: ${articles}">
-                            <tr>
-                                <td><input type="checkbox"></td>
-                                <td>
-                                    <a th:href="${siteUrl}+${articleUrlPath}+'/'+${article.getId()}" rel="bookmark">
-                                        <h4 th:text="${article.getArticleTitle()}">article title</h4>
-                                    </a>
-                                </td>
-                                <td><input type="checkbox"></td>
-                                <td>
-                                    <span th:text="${article.getLastEditDateTime()}">last edit article date</span>
-                                </td>
-                                <td>31,5</td>
-                            </tr>
-                        </th:block>
-                    </table>
-
-                    <!--
-                    блок кнопок для управления статьями
-                    -->
-
-                    <!--
-                    блок для редактирования статей
-                    -->
-
-
-                </div>
-            </div>
-        </div>
-
-    </div>
-    <div th:include="~{fragments/bottom :: bottom}"></div>
+<div class="container">
+    <h1>Администрирование пользователей</h1>
+    <hr>
 </div>
+<div th:include="~{fragments/bottom :: bottom}"></div>
 </body>
 </html>

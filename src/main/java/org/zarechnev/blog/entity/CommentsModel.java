@@ -54,6 +54,9 @@ public class CommentsModel {
      * @return abstract
      */
     public String getAbstractComment() {
-        return this.getCommentBody().substring(0, this.SHORT_COMMENT_LENGTH) + " ...";
+        return this.getCommentBody().substring(
+                0,
+                SHORT_COMMENT_LENGTH > this.getCommentBody().length() ? this.getCommentBody().length() : SHORT_COMMENT_LENGTH
+        ) + " ...";
     }
 }

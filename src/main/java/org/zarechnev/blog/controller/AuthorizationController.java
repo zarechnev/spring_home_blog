@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import javax.servlet.http.HttpServletRequest;
 
 import static org.zarechnev.blog.constant.ControllerPathURLs.AUTHORIZE_URL_PATH;
+import static org.zarechnev.blog.constant.LoggingConstant.loggingClientInfo;
 
 /**
  * The controller for login-logout path.
@@ -27,7 +28,7 @@ public class AuthorizationController {
      */
     @GetMapping(AUTHORIZE_URL_PATH)
     public String authPage(HttpServletRequest request){
-        log.info("Client with IP {} come to to URL {}", request.getRemoteAddr(), request.getRequestURL());
+        log.info(loggingClientInfo, request.getRemoteAddr(), request.getRequestURL());
         return "authorization";
     }
 }

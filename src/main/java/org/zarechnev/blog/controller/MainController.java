@@ -14,6 +14,7 @@ import java.util.Map;
 import java.util.Optional;
 
 import static org.zarechnev.blog.constant.ControllerPathURLs.ARTICLE_URL_PATH;
+import static org.zarechnev.blog.constant.LoggingConstant.loggingClientInfo;
 
 /**
  * The type Main controller.
@@ -36,7 +37,7 @@ public class MainController {
      */
     @GetMapping("/")
     public String main(HttpServletRequest request, Map<String, Object> model) {
-        log.info("Client with IP {} come to to URL {}", request.getRemoteAddr(), request.getRequestURL());
+        log.info(loggingClientInfo, request.getRemoteAddr(), request.getRequestURL());
         model.put("articles", msgRepo.findAll());
         model.put("articleUrlPath", ARTICLE_URL_PATH);
         model.put("siteUrl", env.getProperty("site.url"));
@@ -63,7 +64,7 @@ public class MainController {
             return "redirect:" + env.getProperty("site.url");
         }
 
-        log.info("Client with IP {} come to to URL {}", request.getRemoteAddr(), request.getRequestURL());
+        log.info(loggingClientInfo, request.getRemoteAddr(), request.getRequestURL());
         model.put("article", article.get());
         model.put("articleUrlPath", ARTICLE_URL_PATH);
         model.put("siteUrl", env.getProperty("site.url"));
