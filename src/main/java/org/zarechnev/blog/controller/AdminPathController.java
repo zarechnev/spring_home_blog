@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.zarechnev.blog.repository.SectionRepository;
 import org.zarechnev.blog.repository.ArticleRepository;
 
@@ -20,6 +21,7 @@ import static org.zarechnev.blog.constant.LoggingConstant.LOGGING_CLIENT_INFO;
  */
 @Slf4j
 @Controller()
+@RequestMapping(ADMIN_URL_PATH)
 public class AdminPathController {
     @Autowired
     private ArticleRepository msgRepo;
@@ -36,7 +38,7 @@ public class AdminPathController {
      * @param request the request
      * @return string
      */
-    @GetMapping(ADMIN_URL_PATH)
+    @GetMapping()
     public String mainAdminPage(HttpServletRequest request) {
         log.info(LOGGING_CLIENT_INFO, request.getRemoteAddr(), request.getRequestURL());
 
@@ -49,12 +51,12 @@ public class AdminPathController {
      * @param request the request
      * @return string
      */
-    @GetMapping(ADMIN_URL_PATH + ARTICLE_URL_PATH)
+    @GetMapping(ARTICLE_URL_PATH)
     public String adminArticlesPage(HttpServletRequest request, Map<String, Object> model) {
         log.info(LOGGING_CLIENT_INFO, request.getRemoteAddr(), request.getRequestURL());
         model.put("articles", msgRepo.findAll());
         model.put("articleUrlPath", ARTICLE_URL_PATH);
-        model.put("siteUrl", env.getProperty("site.url"));
+        model.put("siteUrl", env.getProperty(SITE_URL));
 
         return "admin/administration_articles";
     }
@@ -67,12 +69,12 @@ public class AdminPathController {
      * @param request the request
      * @return string
      */
-    @GetMapping(ADMIN_URL_PATH + USER_URL_PATH)
+    @GetMapping(USER_URL_PATH)
     public String adminUsersPage(HttpServletRequest request, Map<String, Object> model) {
         log.info(LOGGING_CLIENT_INFO, request.getRemoteAddr(), request.getRequestURL());
         model.put("articles", msgRepo.findAll());
         model.put("articleUrlPath", ARTICLE_URL_PATH);
-        model.put("siteUrl", env.getProperty("site.url"));
+        model.put("siteUrl", env.getProperty(SITE_URL));
 
         return "admin/administration_users";
     }

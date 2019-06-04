@@ -14,6 +14,7 @@ import java.util.Map;
 import java.util.Optional;
 
 import static org.zarechnev.blog.constant.ControllerPathURLs.ARTICLE_URL_PATH;
+import static org.zarechnev.blog.constant.ControllerPathURLs.SITE_URL;
 import static org.zarechnev.blog.constant.LoggingConstant.LOGGING_CLIENT_INFO;
 import static org.zarechnev.blog.constant.LoggingConstant.LOGGING_MISSING_PAGE_WARN;
 
@@ -41,7 +42,7 @@ public class MainController {
         log.info(LOGGING_CLIENT_INFO, request.getRemoteAddr(), request.getRequestURL());
         model.put("articles", msgRepo.findAll());
         model.put("articleUrlPath", ARTICLE_URL_PATH);
-        model.put("siteUrl", env.getProperty("site.url"));
+        model.put("siteUrl", env.getProperty(SITE_URL));
         return "index";
     }
 
@@ -62,13 +63,13 @@ public class MainController {
 
         if (!article.isPresent()) {
             log.warn(LOGGING_MISSING_PAGE_WARN, request.getRemoteAddr(), request.getRequestURL());
-            return "redirect:" + env.getProperty("site.url");
+            return "redirect:" + env.getProperty(SITE_URL);
         }
 
         log.info(LOGGING_CLIENT_INFO, request.getRemoteAddr(), request.getRequestURL());
         model.put("article", article.get());
         model.put("articleUrlPath", ARTICLE_URL_PATH);
-        model.put("siteUrl", env.getProperty("site.url"));
+        model.put("siteUrl", env.getProperty(SITE_URL));
 
         return "oneArticle";
     }
