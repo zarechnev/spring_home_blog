@@ -15,7 +15,6 @@ test:
 deploy:
   stage: deploy
   script:
-    - chmod +x ./gradlew
     - ./gradlew bootJar
     - scp build/libs/zarechnev-blog-0.1.jar 192.168.0.50:/opt/blog_java_app/
     - ssh 192.168.0.50 "sudo /usr/bin/systemctl restart blog-app.service"

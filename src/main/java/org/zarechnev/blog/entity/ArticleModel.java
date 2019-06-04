@@ -1,5 +1,6 @@
 package org.zarechnev.blog.entity;
 
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,37 +12,32 @@ import java.time.*;
  * DB entity for article.
  */
 @Entity
+@Setter @Getter
 @NoArgsConstructor
 public class ArticleModel {
     private static final int SHORT_ARTICLE_LENGTH = 400;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Getter
+    @Setter(AccessLevel.PROTECTED)
     private long id;
 
     @Column(name = "author")
-    @Setter @Getter
     private String author;
 
     @Column(name = "article_title")
-    @Setter @Getter
     private String articleTitle;
 
     @Column(name = "article_body", length = 10000)
-    @Setter @Getter
     private String articleBody;
 
     @Column(name = "create_date")
-    @Setter @Getter
     private LocalDateTime createDate;
 
     @Column(name = "edited_date")
-    @Setter @Getter
     private LocalDateTime editedDate;
 
     @Column(name = "visible")
-    @Setter @Getter
     private Boolean visible = true;
 
     /**
@@ -51,9 +47,20 @@ public class ArticleModel {
      * @param articleTitle  the article title
      */
     public ArticleModel(String articleAuthor, String articleTitle) {
-        this.author = articleAuthor;
-        this.articleTitle = articleTitle;
-        this.createDate = LocalDateTime.now();
+        this.setAuthor(articleAuthor);
+        this.setArticleTitle(articleTitle);
+        this.setCreateDate(LocalDateTime.now());
+    }
+
+    /**
+     *
+     * @param articleAuthor
+     * @param articleTitle
+     * @param articleBody
+     */
+    public ArticleModel(String articleAuthor, String articleTitle, String articleBody) {
+        this(articleAuthor, articleTitle);
+        this.setArticleBody(articleBody);
     }
 
     /**
