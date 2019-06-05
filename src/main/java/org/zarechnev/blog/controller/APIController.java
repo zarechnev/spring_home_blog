@@ -137,7 +137,7 @@ public class APIController {
                 article.setArticleBody(articleBody);
                 article.setArticleTitle(title);
                 this.articleRepo.save(article);
-            } else throw new Exception(String.format("Article with number %d doesn't exist!", id));
+            } else throw new NullPointerException(String.format("Article with number %d doesn't exist!", id));
 
         } catch (Exception e) {
             log.error(LOGGING_API_PROCCESSING_ERROR, articleInJson, request.getRequestURI(), request.getMethod(),
