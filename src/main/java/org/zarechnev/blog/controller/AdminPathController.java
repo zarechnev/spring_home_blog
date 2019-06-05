@@ -56,7 +56,7 @@ public class AdminPathController {
         log.info(LOGGING_CLIENT_INFO, request.getRemoteAddr(), request.getRequestURL());
         model.put("articles", msgRepo.findAll());
         model.put("articleUrlPath", ARTICLE_URL_PATH);
-        model.put("siteUrl", env.getProperty(SITE_URL));
+        model.put("siteUrl", env.getProperty(SITE_URL_PROPERTY));
 
         return "admin/administration_articles";
     }
@@ -74,7 +74,7 @@ public class AdminPathController {
         log.info(LOGGING_CLIENT_INFO, request.getRemoteAddr(), request.getRequestURL());
         model.put("articles", msgRepo.findAll());
         model.put("articleUrlPath", ARTICLE_URL_PATH);
-        model.put("siteUrl", env.getProperty(SITE_URL));
+        model.put("siteUrl", env.getProperty(SITE_URL_PROPERTY));
 
         return "admin/administration_users";
     }

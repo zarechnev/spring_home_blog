@@ -1,6 +1,7 @@
 buildscript {
 	ext {
-		springBootVersion = '2.1.2.RELEASE'
+		springBootVersion = "2.1.5.RELEASE"
+		log4jVersion = "2.11.1"
 	}
 	repositories {
 		mavenCentral()
@@ -43,21 +44,23 @@ jar {
 }
 
 dependencies {
-	implementation('org.springframework.boot:spring-boot-starter-data-jpa')
-	implementation('org.springframework.boot:spring-boot-starter-web')
-	compile('org.springframework.boot:spring-boot-starter-thymeleaf')
-	compile(group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.11.1')
-	compile(group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.11.1')
+	compile(group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: springBootVersion)
+	compile(group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: springBootVersion)
+	compile(group: 'org.springframework.boot', name: 'spring-boot-starter-thymeleaf', version: springBootVersion)
+	compile(group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: springBootVersion)
+	compile(group: 'org.thymeleaf.extras', name: 'thymeleaf-extras-springsecurity5', version: '3.0.4.RELEASE')
+	compile(group: 'org.apache.logging.log4j', name: 'log4j-api', version: log4jVersion)
+	compile(group: 'org.apache.logging.log4j', name: 'log4j-core', version: log4jVersion)
 	compile(group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.9.9')
 	compile(group: 'org.postgresql', name: 'postgresql', version: '42.1.4')
-	runtimeOnly('com.h2database:h2')
-	testImplementation('org.springframework.boot:spring-boot-starter-test')
+	runtimeOnly(group: 'com.h2database', name: 'h2', version: '1.4.199')
+	testCompile(group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: springBootVersion)
 	compileOnly('org.projectlombok:lombok:1.18.4')
 }
 
 jacocoTestReport {
 	reports {
-		xml.enabled true
+		xml.enabled = true
 	}
 }
 

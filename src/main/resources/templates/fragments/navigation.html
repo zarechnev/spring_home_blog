@@ -1,19 +1,28 @@
-<th:block th:fragment="navigation" xmlns:th="http://www.w3.org/1999/xhtml">
+<th:block th:fragment="navigation" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
     <nav class="navbar navbar-expand-lg navbar-light bg-light py-0">
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="/">Главная<span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="/admin">Вход<span class="sr-only">(current)</span></a>
-                    </li>
-                </ul>
-                <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2 form-control-sm" type="search" placeholder="синхрофазотрон..."
-                           aria-label="Search">
-                    <button class="btn btn-outline-success my-2 my-sm-0 btn-sm" type="submit">Искать</button>
-                </form>
-            </div>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/">Главная<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active m-1" sec:authorize="isAuthenticated()">
+                    <a class="nav-link btn btn-outline-danger my-2 my-sm-0 btn-sm p-1" href="/admin">
+                        Панель Администратора
+                        <span class="sr-only">(current)</span></a>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2 form-control-sm" type="search" placeholder="синхрофазотрон..."
+                       aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0 btn-sm" type="submit">Искать</button>
+            </form>
+            <form class="form-inline my-2 my-lg-0 pl-3" action="/login" sec:authorize="!isAuthenticated()">
+                <button class="btn btn-outline-success my-2 my-sm-0 btn-sm" type="submit">Вход</button>
+            </form>
+            <form class="form-inline my-2 my-lg-0 pl-3" th:action="@{/logout}" method="post"
+                  sec:authorize="isAuthenticated()">
+                <button class="btn btn-outline-success my-2 my-sm-0 btn-sm" type="submit">Выход</button>
+            </form>
+        </div>
     </nav>
 </th:block>

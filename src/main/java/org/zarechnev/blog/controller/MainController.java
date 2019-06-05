@@ -13,8 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 import java.util.Optional;
 
-import static org.zarechnev.blog.constant.ControllerPathURLs.ARTICLE_URL_PATH;
-import static org.zarechnev.blog.constant.ControllerPathURLs.SITE_URL;
+import static org.zarechnev.blog.constant.ControllerPathURLs.*;
 import static org.zarechnev.blog.constant.LoggingConstant.LOGGING_CLIENT_INFO;
 import static org.zarechnev.blog.constant.LoggingConstant.LOGGING_MISSING_PAGE_WARN;
 
@@ -37,12 +36,12 @@ public class MainController {
      * @param model   the entity
      * @return string
      */
-    @GetMapping("/")
+    @GetMapping(ROOT_URL_PATH)
     public String main(HttpServletRequest request, Map<String, Object> model) {
         log.info(LOGGING_CLIENT_INFO, request.getRemoteAddr(), request.getRequestURL());
         model.put("articles", msgRepo.findAll());
         model.put("articleUrlPath", ARTICLE_URL_PATH);
-        model.put("siteUrl", env.getProperty(SITE_URL));
+        model.put("siteUrl", env.getProperty(SITE_URL_PROPERTY));
         return "index";
     }
 
@@ -63,13 +62,13 @@ public class MainController {
 
         if (!article.isPresent()) {
             log.warn(LOGGING_MISSING_PAGE_WARN, request.getRemoteAddr(), request.getRequestURL());
-            return "redirect:" + env.getProperty(SITE_URL);
+            return "redirect:" + env.getProperty(SITE_URL_PROPERTY);
         }
 
         log.info(LOGGING_CLIENT_INFO, request.getRemoteAddr(), request.getRequestURL());
         model.put("article", article.get());
         model.put("articleUrlPath", ARTICLE_URL_PATH);
-        model.put("siteUrl", env.getProperty(SITE_URL));
+        model.put("siteUrl", env.getProperty(SITE_URL_PROPERTY));
 
         return "oneArticle";
     }
