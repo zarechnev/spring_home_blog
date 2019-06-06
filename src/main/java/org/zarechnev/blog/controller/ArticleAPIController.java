@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.zarechnev.blog.entity.ArticleModel;
 import org.zarechnev.blog.repository.ArticleRepository;
@@ -26,9 +25,9 @@ import static org.zarechnev.blog.constant.LoggingConstant.*;
  * The controller for API.
  */
 @Slf4j
-@Controller()
+@RestController
 @RequestMapping(API_URL_PATH + ARTICLE_URL_PATH)
-public class APIController {
+public class ArticleAPIController {
     @Autowired
     private ArticleRepository articleRepo;
 
@@ -90,7 +89,7 @@ public class APIController {
             );
             this.articleRepo.save(article);
         } catch (IOException | NullPointerException e) {
-            log.error(LOGGING_API_PROCCESSING_ERROR, articleInJson, request.getRequestURI(), request.getMethod(),
+            log.error(LOGGING_API_PROCESSING_ERROR, articleInJson, request.getRequestURI(), request.getMethod(),
                     request.getRemoteAddr(), e);
             return UNSUCCESSFUL_ANSWER;
         }
@@ -124,7 +123,7 @@ public class APIController {
             title = jsonNode.get("title").asText();
             articleBody = jsonNode.get("article").asText();
         } catch (IOException | NullPointerException e) {
-            log.error(LOGGING_API_PROCCESSING_ERROR, articleInJson, request.getRequestURI(), request.getMethod(),
+            log.error(LOGGING_API_PROCESSING_ERROR, articleInJson, request.getRequestURI(), request.getMethod(),
                     request.getRemoteAddr(), e);
             return UNSUCCESSFUL_ANSWER;
         }
@@ -137,10 +136,10 @@ public class APIController {
                 article.setArticleBody(articleBody);
                 article.setArticleTitle(title);
                 this.articleRepo.save(article);
-            } else throw new NullPointerException(String.format("Article with number %d doesn't exist!", id));
+            } else throw new NullPointerException(String.format(LOGGING_API_ARTICLE_DOESNT_EXIST, id));
 
         } catch (Exception e) {
-            log.error(LOGGING_API_PROCCESSING_ERROR, articleInJson, request.getRequestURI(), request.getMethod(),
+            log.error(LOGGING_API_PROCESSING_ERROR, articleInJson, request.getRequestURI(), request.getMethod(),
                     request.getRemoteAddr(), e);
             return UNSUCCESSFUL_ANSWER;
         }

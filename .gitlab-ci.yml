@@ -1,8 +1,8 @@
 stages:
   - build
   - test
-  - deploy
   - analyze
+  - deploy
 
 build:
   stage: build
@@ -12,13 +12,13 @@ test:
   stage: test
   script: ./gradlew test
 
+analyze:
+  stage: analyze
+  script: ./gradlew sonarqube -Dsonar.projectKey=dfgdf9g8d7fg9d87fgd97g -Dsonar.host.url=http://192.168.0.40 -Dsonar.login=f694c3a5e578fc0c3dd60c632580701138c4ec49 -x test
+
 deploy:
   stage: deploy
   script:
-    - ./gradlew bootJar
+    - ./gradlew bootJar -x test
     - scp build/libs/zarechnev-blog-0.1.jar 192.168.0.50:/opt/blog_java_app/
     - ssh 192.168.0.50 "sudo /usr/bin/systemctl restart blog-app.service"
-
-analyze:
-  stage: analyze
-  script: ./gradlew sonarqube -Dsonar.projectKey=dfgdf9g8d7fg9d87fgd97g -Dsonar.host.url=http://192.168.0.40 -Dsonar.login=f694c3a5e578fc0c3dd60c632580701138c4ec49

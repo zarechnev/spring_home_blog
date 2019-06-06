@@ -9,7 +9,7 @@ import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class APIControllerTest {
+public class ArticleAPIControllerTest {
 
     @Test
     public void addArticle() {

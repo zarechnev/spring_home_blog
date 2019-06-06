@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.zarechnev.blog.entity.ArticleModel;
 import org.zarechnev.blog.repository.ArticleRepository;
 
@@ -22,6 +23,7 @@ import static org.zarechnev.blog.constant.LoggingConstant.LOGGING_MISSING_PAGE_W
  */
 @Slf4j
 @Controller
+@RequestMapping(ROOT_URL_PATH)
 public class MainController {
     @Autowired
     private ArticleRepository msgRepo;
@@ -36,7 +38,7 @@ public class MainController {
      * @param model   the entity
      * @return string
      */
-    @GetMapping(ROOT_URL_PATH)
+    @GetMapping
     public String main(HttpServletRequest request, Map<String, Object> model) {
         log.info(LOGGING_CLIENT_INFO, request.getRemoteAddr(), request.getRequestURL());
         model.put("articles", msgRepo.findAll());
