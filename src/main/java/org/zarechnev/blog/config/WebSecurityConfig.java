@@ -42,7 +42,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .logoutSuccessUrl(ROOT_URL_PATH)
                     .permitAll();
 
-        //http.cors().and().csrf().disable();
+        http.cors().and().csrf().disable();
     }
 
     @Bean
