@@ -1,22 +1,7 @@
-buildscript {
-	ext {
-		springBootVersion = "2.1.5.RELEASE"
-		log4jVersion = "2.11.1"
-	}
-	repositories {
-		mavenCentral()
-		maven {
-			url "https://plugins.gradle.org/m2/"
-		}
-	}
-	dependencies {
-		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-		classpath "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:2.6"
-	}
-}
-
 plugins {
-	id "org.sonarqube" version "2.6.1"
+	id 'org.springframework.boot' version '2.1.5.RELEASE'
+	id 'java'
+	id 'org.sonarqube' version '2.6.1'
 }
 
 apply plugin: 'java'
@@ -26,7 +11,7 @@ apply plugin: 'io.spring.dependency-management'
 apply plugin: 'jacoco'
 
 jacoco {
-	toolVersion = "0.8.2"
+	toolVersion = '0.8.2'
 }
 
 group = 'org.zarechnev.blog'
@@ -44,41 +29,24 @@ jar {
 }
 
 dependencies {
-	compile(group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: springBootVersion)
-	compile(group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: springBootVersion)
-	compile(group: 'org.springframework.boot', name: 'spring-boot-starter-thymeleaf', version: springBootVersion)
-	compile(group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: springBootVersion)
-	compile(group: 'org.thymeleaf.extras', name: 'thymeleaf-extras-springsecurity5', version: '3.0.4.RELEASE')
-	compile(group: 'org.apache.logging.log4j', name: 'log4j-api', version: log4jVersion)
-	compile(group: 'org.apache.logging.log4j', name: 'log4j-core', version: log4jVersion)
-	compile(group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.9.9')
-	compile(group: 'org.postgresql', name: 'postgresql', version: '42.1.4')
-	runtimeOnly(group: 'com.h2database', name: 'h2', version: '1.4.199')
-	testCompile(group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: springBootVersion)
-	compileOnly('org.projectlombok:lombok:1.18.4')
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
+	implementation 'org.apache.logging.log4j:log4j-api'
+	implementation 'org.apache.logging.log4j:log4j-core'
+	implementation 'com.fasterxml.jackson.core:jackson-databind'
+	compileOnly 'org.projectlombok:lombok'
+	runtimeOnly 'com.h2database:h2'
+	runtimeOnly 'org.postgresql:postgresql'
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.springframework.security:spring-security-test'
 }
 
 jacocoTestReport {
 	reports {
 		xml.enabled = true
-	}
-}
-
-task printTotalCoverage(dependsOn: 'jacocoTestReport') {
-	doLast {
-		def testReportFile = project.file("${project.buildDir}/reports/jacoco/test/jacocoTestReport.xml")
-		if (testReportFile.exists()) {
-			def rootNode = new XmlParser(false, false).parseText(testReportFile.text.replaceAll("<!DOCTYPE[^>]*>", ""))
-			def totalCovered = 0
-			def totalMissed = 0
-			rootNode.counter.each { counter ->
-				try {
-					totalCovered += Integer.valueOf(counter.@covered as String)
-					totalMissed += Integer.valueOf(counter.@missed as String)
-				} catch (ignore) {}
-			}
-			// Test coverage parsing regex: Total:\s[\d\.\,]+%
-			println "Coverage Total: ${String.format('%.2f', 100.0 * totalCovered / (totalMissed + totalCovered))}%"
-		}
 	}
 }

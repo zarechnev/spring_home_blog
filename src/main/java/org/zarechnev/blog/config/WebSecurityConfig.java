@@ -17,7 +17,7 @@ import static org.zarechnev.blog.constant.ControllerPathURLs.*;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     /**
-     * Необходимо логировать процесс входа и выхода пользователя на сайт
+     * TODO Необходимо логировать процесс входа и выхода пользователя на сайт
      * @param http
      * @throws Exception
      */
@@ -45,6 +45,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.cors().and().csrf().disable();
     }
 
+    /**
+     * TODO Сделать нормальную авторизацию с БД-бином для хранения информации о пользователях
+     * @return
+     */
     @Bean
     @Override
     public UserDetailsService userDetailsService() {
