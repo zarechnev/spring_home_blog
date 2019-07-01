@@ -12,8 +12,8 @@
                 <div class="col">
 
                     <div class="alert alert-light" role="alert">
-                        <button type="button" class="btn btn-success my-2 my-sm-0 btn-sm" v-on:click="showAddArticleForm" id="add_article_btn">Добавить</button>
-                        <button type="button" class="btn btn-info my-2 my-sm-0 btn-sm" v-on:click="">Редактировать</button>
+                        <button type="button" class="btn btn-success my-2 my-sm-0 btn-sm" @click="showAddArticleForm()" id="add_article_btn">Добавить</button>
+                        <button type="button" class="btn btn-info my-2 my-sm-0 btn-sm" @click="editArticleButtonClick()">Редактировать</button>
                         <button type="button" class="btn btn-danger my-2 my-sm-0 btn-sm">Удалить</button>
                         <button type="button" class="btn btn-info my-2 my-sm-0 btn-sm">Комментарии</button>
                     </div>
@@ -32,7 +32,7 @@
 
                         <th:block th:each="article: ${articles}">
                             <tr>
-                                <td><input type="checkbox"></td>
+                                <td><input type="checkbox" th:id="articleCheckBox+${article.getId()}" ></td>
                                 <td>
                                     <a th:href="${siteUrl}+${articleUrlPath}+'/'+${article.getId()}" rel="bookmark">
                                         <span th:text="${article.getArticleTitle()}">article title</span>
