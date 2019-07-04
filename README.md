@@ -14,7 +14,7 @@ git clone https://github.com/zarechnev/spring_home_blog.git
 cd ./spring_home_blog
 nano ./spring_home_blog/src/main/resources/application.yml
 ./gradlew build
-java -jar ./build/libs/demo-0.0.1-SNAPSHOT.jar
+java -jar ./build/libs/zarechnev-blog-0.1.jar
 ```
 
 Go to http://localhost:8080. 
@@ -22,10 +22,13 @@ Go to http://localhost:8080.
 ### Technology stack
 This project uses
 - Java 8
-- Spring (Boot, MVC, Data/JPA
+- Spring (Boot, MVC, Data/JPA)
 - gradle
 - Thymeleaf
 - H2-DB
+- VueJs
+- Bootstrap
+- JQuery
 
 ### ToDo
 - authorization
