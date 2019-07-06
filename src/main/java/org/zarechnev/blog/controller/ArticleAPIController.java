@@ -34,8 +34,8 @@ public class ArticleAPIController {
     /**
      * Возвращаем все статьи в виде json-объектов
      *
-     * @param request
-     * @return
+     * @param request - HttpServletRequest request
+     * @return - all articles in json
      */
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody
@@ -47,9 +47,9 @@ public class ArticleAPIController {
     /**
      * Возвращаем статью в виде json-объекта
      *
-     * @param request
-     * @param id
-     * @return
+     * @param request - HttpServletRequest request
+     * @param id - article id
+     * @return - article as json-object
      */
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody
@@ -97,7 +97,7 @@ public class ArticleAPIController {
     }
 
     /**
-     * Обновляем стотью по переданному json-объекту
+     * Обновляем статью по переданному json-объекту
      * Пример запроса:
      * {
      * "author": "Author",
@@ -105,8 +105,8 @@ public class ArticleAPIController {
      * "article": "Article body"
      * }
      *
-     * @param request
-     * @return
+     * @param request - HttpServletRequest request
+     * @return - response code depending result
      */
     @PutMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody
