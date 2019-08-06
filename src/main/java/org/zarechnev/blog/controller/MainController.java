@@ -25,8 +25,9 @@ import static org.zarechnev.blog.constant.LoggingConstant.LOGGING_MISSING_PAGE_W
 @Controller
 @RequestMapping(ROOT_URL_PATH)
 public class MainController {
+
     @Autowired
-    private ArticleRepository msgRepo;
+    private ArticleRepository articleRepository;
 
     @Autowired
     private Environment env;
@@ -41,7 +42,7 @@ public class MainController {
     @GetMapping
     public String main(HttpServletRequest request, Map<String, Object> model) {
         log.info(LOGGING_CLIENT_INFO, request.getRemoteAddr(), request.getRequestURL());
-        model.put("articles", msgRepo.findAll());
+        model.put("articles", articleRepository.findAll());
         model.put("articleUrlPath", ARTICLE_URL_PATH);
         model.put("siteUrl", env.getProperty(SITE_URL_PROPERTY));
         return "index";
@@ -60,7 +61,7 @@ public class MainController {
      */
     @GetMapping(value = ARTICLE_URL_PATH + "/{id}")
     public String articleById(HttpServletRequest request, @PathVariable("id") long id, Map<String, Object> model) {
-        Optional<ArticleModel> article = msgRepo.findById(id);
+        Optional<ArticleModel> article = articleRepository.findById(id);
 
         if (!article.isPresent()) {
             log.warn(LOGGING_MISSING_PAGE_WARN, request.getRemoteAddr(), request.getRequestURL());

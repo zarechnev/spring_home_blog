@@ -48,7 +48,7 @@ public class ArticleAPIController {
      * Возвращаем статью в виде json-объекта
      *
      * @param request - HttpServletRequest request
-     * @param id - article id
+     * @param id      - article id
      * @return - article as json-object
      */
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -77,8 +77,8 @@ public class ArticleAPIController {
      * @return - Ответ в виде "сырой" строки
      */
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody
-    String addArticle(HttpServletRequest request, @RequestBody String articleInJson) {
+    @ResponseBody
+    public ResponseEntity<Object> addArticle(HttpServletRequest request, @RequestBody String articleInJson) {
         log.info(LOGGING_CLIENT_INFO, request.getRemoteAddr(), request.getRequestURL());
         try {
             JsonNode jsonNode = new ObjectMapper().readTree(articleInJson);
@@ -91,9 +91,9 @@ public class ArticleAPIController {
         } catch (IOException | NullPointerException e) {
             log.error(LOGGING_API_PROCESSING_ERROR, articleInJson, request.getRequestURI(), request.getMethod(),
                     request.getRemoteAddr(), e);
-            return UNSUCCESSFUL_ANSWER;
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(UNSUCCESSFUL_ANSWER);
         }
-        return SUCCESSFUL_ANSWER;
+        return ResponseEntity.status(HttpStatus.OK).body(SUCCESSFUL_ANSWER);
     }
 
     /**

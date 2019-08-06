@@ -9,11 +9,9 @@ import org.zarechnev.blog.repository.SectionRepository;
 import org.zarechnev.blog.repository.ArticleRepository;
 import java.util.ArrayList;
 
-/**
- * Component for init DataBase with test data.
- */
 @Component
 public class InitDBWithTestData {
+
     @Autowired
     private ArticleRepository articleRepo;
     @Autowired
@@ -21,9 +19,6 @@ public class InitDBWithTestData {
 
     private InitDBWithTestData() { }
 
-    /**
-     * Init.
-     */
     @Bean
     public void initDB() {
         ArrayList<ArticleModel> articles = (ArrayList<ArticleModel>) articleRepo.findAll();
