@@ -9,7 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.zarechnev.blog.entity.ArticleModel;
+import org.zarechnev.blog.entity.Article;
 import org.zarechnev.blog.repository.ArticleRepository;
 
 import javax.servlet.http.HttpServletRequest;
@@ -54,7 +54,7 @@ public class ArticleAPIController {
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody
     ResponseEntity<Object> articleByIdInJson(HttpServletRequest request, @PathVariable("id") long id) {
-        Optional<ArticleModel> article = articleRepo.findById(id);
+        Optional<Article> article = articleRepo.findById(id);
         if (!article.isPresent()) {
             log.warn(LOGGING_MISSING_PAGE_WARN, request.getRemoteAddr(), request.getRequestURL());
             return new ResponseEntity<>(new Object(), HttpStatus.BAD_REQUEST);
@@ -82,7 +82,7 @@ public class ArticleAPIController {
         log.info(LOGGING_CLIENT_INFO, request.getRemoteAddr(), request.getRequestURL());
         try {
             JsonNode jsonNode = new ObjectMapper().readTree(articleInJson);
-            ArticleModel article = new ArticleModel(
+            Article article = new Article(
                     jsonNode.get("author").asText(),
                     jsonNode.get("title").asText(),
                     jsonNode.get("article").asText()
@@ -129,9 +129,9 @@ public class ArticleAPIController {
         }
 
         try {
-            Optional<ArticleModel> articleModel = articleRepo.findById(id);
+            Optional<Article> articleModel = articleRepo.findById(id);
             if (articleModel.isPresent()) {
-                ArticleModel article = articleModel.get();
+                Article article = articleModel.get();
                 article.setAuthor(author);
                 article.setArticleBody(articleBody);
                 article.setArticleTitle(title);

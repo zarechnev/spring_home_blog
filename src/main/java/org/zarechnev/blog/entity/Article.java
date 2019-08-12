@@ -8,13 +8,10 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.time.*;
 
-/**
- * DB entity for article.
- */
 @Entity
 @Setter @Getter
 @NoArgsConstructor
-public class ArticleModel {
+public class Article {
     private static final int SHORT_ARTICLE_LENGTH = 400;
 
     @Id
@@ -40,34 +37,17 @@ public class ArticleModel {
     @Column(name = "visible")
     private Boolean visible = true;
 
-    /**
-     * Instantiates a new Article entity.
-     *
-     * @param articleAuthor the article author
-     * @param articleTitle  the article title
-     */
-    public ArticleModel(String articleAuthor, String articleTitle) {
+    public Article(String articleAuthor, String articleTitle) {
         this.setAuthor(articleAuthor);
         this.setArticleTitle(articleTitle);
         this.setCreateDate(LocalDateTime.now());
     }
 
-    /**
-     *
-     * @param articleAuthor
-     * @param articleTitle
-     * @param articleBody
-     */
-    public ArticleModel(String articleAuthor, String articleTitle, String articleBody) {
+    public Article(String articleAuthor, String articleTitle, String articleBody) {
         this(articleAuthor, articleTitle);
         this.setArticleBody(articleBody);
     }
 
-    /**
-     * Return DateTime of last edit.
-     *
-     * @return last edit date time
-     */
     public LocalDateTime getLastEditDateTime() {
         // TODO: Think about good view on site.
         ZoneId zoneId = ZoneId.systemDefault();

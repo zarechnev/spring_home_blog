@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
  */
 @Entity
 @NoArgsConstructor
-public class CommentsModel {
+public class Comments {
     private static final int SHORT_COMMENT_LENGTH = 100;
 
     @Id
@@ -42,7 +42,7 @@ public class CommentsModel {
      * @param commentAuthor the comment author
      * @param commentBody  the comment title
      */
-    public CommentsModel(String commentAuthor, String commentBody) {
+    public Comments(String commentAuthor, String commentBody) {
         this.author = commentAuthor;
         this.commentBody = commentBody;
         this.createDate = LocalDateTime.now();

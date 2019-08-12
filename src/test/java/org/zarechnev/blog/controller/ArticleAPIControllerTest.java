@@ -1,49 +1,69 @@
 package org.zarechnev.blog.controller;
 
+import org.junit.Before;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
-import org.testng.junit.JUnit4TestRunner;
+import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.zarechnev.blog.entity.Article;
+import org.zarechnev.blog.repository.ArticleRepository;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.zarechnev.blog.constant.Answer.SUCCESSFUL_ANSWER;
-import static org.zarechnev.blog.constant.Answer.UNSUCCESSFUL_ANSWER;
-import static org.zarechnev.blog.constant.ControllerPathURLs.API_URL_PATH;
-import static org.zarechnev.blog.constant.ControllerPathURLs.ARTICLE_URL_PATH;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringBootTest
-@AutoConfigureMockMvc
 class ArticleAPIControllerTest {
 
-    @Autowired
+    @Mock
+    private ArticleRepository articleRepo;
+
+    @InjectMocks
+    private ArticleAPIController controller;
+
     private MockMvc mockMvc;
 
     private String correctNewArticleInJson = "{\"author\": \"Author\", \"title\": \"Title\", \"article\": \"Article\"}";
     private String inCorrectNewArticleInJson = "{\"athor\": \"Author\", \"title\": \"Title\", \"article\": \" body\"}";
 
-    @Test
-    void addArticleWithIncorrectJson() throws Throwable {
-        mockMvc.perform(post(API_URL_PATH + ARTICLE_URL_PATH)
-                .contentType("application/json")
-                .content(inCorrectNewArticleInJson))
-                .andExpect(status().is4xxClientError())
-                .andExpect(content().string(UNSUCCESSFUL_ANSWER));
+    @Before
+    public void init() {
+        MockitoAnnotations.initMocks(this);
+        mockMvc = MockMvcBuilders.standaloneSetup(controller)
+                .alwaysDo(MockMvcResultHandlers.print())
+                .build();
     }
 
     @Test
-    void addArticleWithCorrectJson() throws Throwable {
-        mockMvc.perform(post(API_URL_PATH + ARTICLE_URL_PATH)
-                .contentType("application/json")
-                .content(correctNewArticleInJson))
-                .andExpect(status().isOk())
-                .andExpect(content().string(SUCCESSFUL_ANSWER));
+    void addArticleWithIncorrectJson() throws Exception {
+        MockHttpServletRequestBuilder builder = MockMvcRequestBuilders.post("/api/article", correctNewArticleInJson);
+        Mockito.when(articleRepo.save(new Article())).thenReturn(new Article());
+
+        mockMvc.perform(builder)
+                .andExpect(status().is4xxClientError())
+                .andExpect(content().string("Unsuccessful!"));
+
+//        mockMvc.perform(post("/api/article")
+//                .contentType("application/json")
+//                .content(inCorrectNewArticleInJson))
+//                .andExpect(status().is4xxClientError())
+//                .andExpect(content().string("Unsuccessful!"));
     }
+
+//    @Test
+//    void addArticleWithCorrectJson() throws Throwable {
+//        mockMvc.perform(post("/api/article")
+//                .contentType("application/json")
+//                .content(correctNewArticleInJson))
+//                .andExpect(status().isOk())
+//                .andExpect(content().string("Successful!"));
+//    }
 }

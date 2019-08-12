@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.zarechnev.blog.entity.ArticleModel;
+import org.zarechnev.blog.entity.Article;
 import org.zarechnev.blog.repository.ArticleRepository;
 
 import javax.servlet.http.HttpServletRequest;
@@ -61,7 +61,7 @@ public class MainController {
      */
     @GetMapping(value = ARTICLE_URL_PATH + "/{id}")
     public String articleById(HttpServletRequest request, @PathVariable("id") long id, Map<String, Object> model) {
-        Optional<ArticleModel> article = articleRepository.findById(id);
+        Optional<Article> article = articleRepository.findById(id);
 
         if (!article.isPresent()) {
             log.warn(LOGGING_MISSING_PAGE_WARN, request.getRemoteAddr(), request.getRequestURL());
