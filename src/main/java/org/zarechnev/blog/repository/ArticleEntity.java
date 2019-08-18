@@ -1,4 +1,4 @@
-package org.zarechnev.blog.entity;
+package org.zarechnev.blog.repository;
 
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -11,7 +11,8 @@ import java.time.*;
 @Entity
 @Setter @Getter
 @NoArgsConstructor
-public class Article {
+public class ArticleEntity {
+
     private static final int SHORT_ARTICLE_LENGTH = 400;
 
     @Id
@@ -37,13 +38,13 @@ public class Article {
     @Column(name = "visible")
     private Boolean visible = true;
 
-    public Article(String articleAuthor, String articleTitle) {
+    public ArticleEntity(String articleAuthor, String articleTitle) {
         this.setAuthor(articleAuthor);
         this.setArticleTitle(articleTitle);
         this.setCreateDate(LocalDateTime.now());
     }
 
-    public Article(String articleAuthor, String articleTitle, String articleBody) {
+    public ArticleEntity(String articleAuthor, String articleTitle, String articleBody) {
         this(articleAuthor, articleTitle);
         this.setArticleBody(articleBody);
     }
@@ -56,21 +57,11 @@ public class Article {
         else return this.createDate;
     }
 
-    /**
-     * Return short part of article to show on main page.
-     *
-     * TODO Возвращать определённое количество слов, и проверять на общюю длинну
-     *
-     * @return abstract
-     */
+    // TODO Возвращать определённое количество слов, и проверять на общюю длинну
     public String getAbstract() {
         return this.getArticleBody().substring(0,
                 SHORT_ARTICLE_LENGTH > this.getArticleBody().length() ? this.getArticleBody().length() : SHORT_ARTICLE_LENGTH
         ) + " ...";
     }
 
-    @Override
-    public String toString() {
-        return String.format("%s: %s", this.author, this.articleTitle);
-    }
 }

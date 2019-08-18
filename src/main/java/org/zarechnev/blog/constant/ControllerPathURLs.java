@@ -1,9 +1,7 @@
 package org.zarechnev.blog.constant;
 
 public class ControllerPathURLs {
-    /**
-     * Disable instantiate class.
-     */
+
     private ControllerPathURLs() {
     }
 
@@ -18,4 +16,5 @@ public class ControllerPathURLs {
     public static final String CSS_URL_PATH_PATTERN = "/css/**";
     public static final String JS_URL_PATH_PATTERN = "/js/**";
     public static final String SITE_URL_PROPERTY = "site.url";
+
 }

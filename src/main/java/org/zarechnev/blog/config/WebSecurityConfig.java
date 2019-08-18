@@ -17,11 +17,7 @@ import static org.zarechnev.blog.constant.ControllerPathURLs.*;
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    /**
-     * TODO Необходимо логировать процесс входа и выхода пользователя на сайт
-     * @param http
-     * @throws Exception
-     */
+     // TODO Необходимо логировать процесс входа и выхода пользователя на сайт
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
@@ -46,10 +42,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
     }
 
-    /**
-     * TODO Сделать нормальную авторизацию с БД-бином для хранения информации о пользователях
-     * @return
-     */
+    // TODO Сделать нормальную авторизацию с БД-бином для хранения информации о пользователях
     @Bean
     @Override
     public UserDetailsService userDetailsService() {
@@ -62,4 +55,5 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         return new InMemoryUserDetailsManager(user);
     }
+
 }

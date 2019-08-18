@@ -9,7 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.zarechnev.blog.entity.Article;
+import org.zarechnev.blog.repository.ArticleEntity;
 import org.zarechnev.blog.repository.ArticleRepository;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,22 +21,14 @@ import static org.zarechnev.blog.constant.Answer.UNSUCCESSFUL_ANSWER;
 import static org.zarechnev.blog.constant.ControllerPathURLs.*;
 import static org.zarechnev.blog.constant.LoggingConstant.*;
 
-/**
- * The controller for API.
- */
 @Slf4j
 @RestController
 @RequestMapping(API_URL_PATH + ARTICLE_URL_PATH)
 public class ArticleAPIController {
+
     @Autowired
     private ArticleRepository articleRepo;
 
-    /**
-     * Возвращаем все статьи в виде json-объектов
-     *
-     * @param request - HttpServletRequest request
-     * @return - all articles in json
-     */
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody
     ResponseEntity<Object> allArticlesInJson(HttpServletRequest request) {
@@ -44,17 +36,10 @@ public class ArticleAPIController {
         return new ResponseEntity<>(articleRepo.findAll(), HttpStatus.OK);
     }
 
-    /**
-     * Возвращаем статью в виде json-объекта
-     *
-     * @param request - HttpServletRequest request
-     * @param id      - article id
-     * @return - article as json-object
-     */
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody
     ResponseEntity<Object> articleByIdInJson(HttpServletRequest request, @PathVariable("id") long id) {
-        Optional<Article> article = articleRepo.findById(id);
+        Optional<ArticleEntity> article = articleRepo.findById(id);
         if (!article.isPresent()) {
             log.warn(LOGGING_MISSING_PAGE_WARN, request.getRemoteAddr(), request.getRequestURL());
             return new ResponseEntity<>(new Object(), HttpStatus.BAD_REQUEST);
@@ -82,12 +67,12 @@ public class ArticleAPIController {
         log.info(LOGGING_CLIENT_INFO, request.getRemoteAddr(), request.getRequestURL());
         try {
             JsonNode jsonNode = new ObjectMapper().readTree(articleInJson);
-            Article article = new Article(
+            ArticleEntity articleEntity = new ArticleEntity(
                     jsonNode.get("author").asText(),
                     jsonNode.get("title").asText(),
                     jsonNode.get("article").asText()
             );
-            this.articleRepo.save(article);
+            this.articleRepo.save(articleEntity);
         } catch (IOException | NullPointerException e) {
             log.error(LOGGING_API_PROCESSING_ERROR, articleInJson, request.getRequestURI(), request.getMethod(),
                     request.getRemoteAddr(), e);
@@ -129,13 +114,13 @@ public class ArticleAPIController {
         }
 
         try {
-            Optional<Article> articleModel = articleRepo.findById(id);
+            Optional<ArticleEntity> articleModel = articleRepo.findById(id);
             if (articleModel.isPresent()) {
-                Article article = articleModel.get();
-                article.setAuthor(author);
-                article.setArticleBody(articleBody);
-                article.setArticleTitle(title);
-                this.articleRepo.save(article);
+                ArticleEntity articleEntity = articleModel.get();
+                articleEntity.setAuthor(author);
+                articleEntity.setArticleBody(articleBody);
+                articleEntity.setArticleTitle(title);
+                this.articleRepo.save(articleEntity);
             } else throw new NullPointerException(String.format(LOGGING_API_ARTICLE_DOESNT_EXIST, id));
 
         } catch (Exception e) {
@@ -146,4 +131,5 @@ public class ArticleAPIController {
 
         return SUCCESSFUL_ANSWER;
     }
+
 }

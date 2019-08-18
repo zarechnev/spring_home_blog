@@ -13,7 +13,7 @@ import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilde
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.zarechnev.blog.entity.Article;
+import org.zarechnev.blog.repository.ArticleEntity;
 import org.zarechnev.blog.repository.ArticleRepository;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -21,7 +21,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-class ArticleAPIControllerTest {
+class ArticleEntityAPIControllerTest {
 
     @Mock
     private ArticleRepository articleRepo;
@@ -45,7 +45,7 @@ class ArticleAPIControllerTest {
     @Test
     void addArticleWithIncorrectJson() throws Exception {
         MockHttpServletRequestBuilder builder = MockMvcRequestBuilders.post("/api/article", correctNewArticleInJson);
-        Mockito.when(articleRepo.save(new Article())).thenReturn(new Article());
+        Mockito.when(articleRepo.save(new ArticleEntity())).thenReturn(new ArticleEntity());
 
         mockMvc.perform(builder)
                 .andExpect(status().is4xxClientError())
