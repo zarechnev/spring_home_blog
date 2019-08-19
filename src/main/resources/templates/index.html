@@ -14,7 +14,7 @@
         <div class="col">
             <th:block th:each="article: ${articles}">
                 <h4 th:text="${article.getArticleTitle()}">article title</h4>
-                <p th:text="${article.getAbstract()}">shot top part of article</p>
+                <p th:text="${article.getAbstraction()}">shot top part of article</p>
                 <div class="alert alert-light mb-3" role="alert">
                     <a th:href="${siteUrl}+${articleUrlPath}+'/'+${article.getId()}"><span>Подробнее</span></a>
                 </div>

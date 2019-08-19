@@ -1,15 +1,15 @@
 package org.zarechnev.blog.repository;
 
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import org.springframework.beans.factory.annotation.Value;
 
 import javax.persistence.*;
 import java.time.*;
 
 @Entity
-@Setter @Getter
+@Data
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor
 public class ArticleEntity {
 
@@ -36,7 +36,8 @@ public class ArticleEntity {
     private LocalDateTime editedDate;
 
     @Column(name = "visible")
-    private Boolean visible = true;
+    @Value("true")
+    private Boolean visible;
 
     public ArticleEntity(String articleAuthor, String articleTitle) {
         this.setAuthor(articleAuthor);
@@ -55,13 +56,6 @@ public class ArticleEntity {
         if (this.editedDate != null && this.editedDate.atZone(zoneId).toEpochSecond() > this.createDate.atZone(zoneId).toEpochSecond())
             return this.editedDate;
         else return this.createDate;
-    }
-
-    // TODO Возвращать определённое количество слов, и проверять на общюю длинну
-    public String getAbstract() {
-        return this.getArticleBody().substring(0,
-                SHORT_ARTICLE_LENGTH > this.getArticleBody().length() ? this.getArticleBody().length() : SHORT_ARTICLE_LENGTH
-        ) + " ...";
     }
 
 }

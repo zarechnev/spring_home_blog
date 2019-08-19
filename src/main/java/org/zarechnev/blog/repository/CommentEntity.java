@@ -40,7 +40,7 @@ public class CommentEntity {
         this.createDate = LocalDateTime.now();
     }
 
-    public String getAbstractComment() {
+    public String getAbstractionComment() {
         return this.getCommentBody().substring(
                 0,
                 SHORT_COMMENT_LENGTH > this.getCommentBody().length() ? this.getCommentBody().length() : SHORT_COMMENT_LENGTH
