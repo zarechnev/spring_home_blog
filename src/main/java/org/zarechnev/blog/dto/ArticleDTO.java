@@ -2,7 +2,6 @@ package org.zarechnev.blog.dto;
 
 import lombok.Builder;
 import lombok.Data;
-import lombok.Getter;
 
 import java.time.LocalDateTime;
 
@@ -18,9 +17,7 @@ public class ArticleDTO {
 
     private String articleBody;
 
-    private LocalDateTime createDate;
-
-    private LocalDateTime editedDate;
+    private LocalDateTime createdDatetime;
 
     private Boolean visible;
 

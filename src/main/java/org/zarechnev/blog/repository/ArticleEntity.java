@@ -13,8 +13,6 @@ import java.time.*;
 @NoArgsConstructor
 public class ArticleEntity {
 
-    private static final int SHORT_ARTICLE_LENGTH = 400;
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Setter(AccessLevel.PROTECTED)
@@ -32,11 +30,8 @@ public class ArticleEntity {
     @Column(name = "create_date")
     private LocalDateTime createDate;
 
-    @Column(name = "edited_date")
-    private LocalDateTime editedDate;
-
     @Column(name = "visible")
-    @Value("true")
+    @Value("false")
     private Boolean visible;
 
     public ArticleEntity(String articleAuthor, String articleTitle) {
@@ -44,18 +39,4 @@ public class ArticleEntity {
         this.setArticleTitle(articleTitle);
         this.setCreateDate(LocalDateTime.now());
     }
-
-    public ArticleEntity(String articleAuthor, String articleTitle, String articleBody) {
-        this(articleAuthor, articleTitle);
-        this.setArticleBody(articleBody);
-    }
-
-    public LocalDateTime getLastEditDateTime() {
-        // TODO: Think about good view on site.
-        ZoneId zoneId = ZoneId.systemDefault();
-        if (this.editedDate != null && this.editedDate.atZone(zoneId).toEpochSecond() > this.createDate.atZone(zoneId).toEpochSecond())
-            return this.editedDate;
-        else return this.createDate;
-    }
-
 }

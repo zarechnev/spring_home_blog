@@ -10,4 +10,8 @@ public interface MainService {
 
     List<ArticleDTO> getListArticlesToMainPage();
 
+    void addArticle(ArticleDTO articleDTO);
+
+    void updateArticle(ArticleDTO articleDTO);
+
 }

@@ -35,12 +35,14 @@
                                 <td><input type="checkbox" th:id="articleCheckBox+${article.getId()}" ></td>
                                 <td>
                                     <a th:href="${siteUrl}+${articleUrlPath}+'/'+${article.getId()}" rel="bookmark">
-                                        <span th:text="${article.getArticleTitle()}">article title</span>
+                                        <!--<span th:text="${article.getArticleTitle()}">article title</span>-->
+                                        <span>article title</span>
                                     </a>
                                 </td>
                                 <td><input type="checkbox"></td>
                                 <td>
-                                    <span th:text="${article.getLastEditDateTime()}">last edit article date</span>
+                                    <!--<span th:text="${article.getLastEditedDatetime()}">last edit article date</span>-->
+                                    <span>last edit article date</span>
                                 </td>
                                 <td>31</td>
                                 <td>31/<b>43</b></td>

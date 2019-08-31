@@ -3,6 +3,7 @@ package org.zarechnev.blog.dto;
 import org.springframework.stereotype.Service;
 import org.zarechnev.blog.repository.ArticleEntity;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,8 +25,7 @@ public class ArticleDTOEntityConverterImpl implements ArticleDTOEntityConverter 
                 .articleTitle(articleEntity.getArticleTitle())
                 .articleBody(articleEntity.getArticleBody())
                 .abstraction(articleAbstract)
-                .createDate(articleEntity.getCreateDate())
-                .editedDate(articleEntity.getEditedDate())
+                .createdDatetime(articleEntity.getCreateDate())
                 .visible(articleEntity.getVisible())
                 .build();
     }
@@ -39,15 +39,24 @@ public class ArticleDTOEntityConverterImpl implements ArticleDTOEntityConverter 
 
     @Override
     public ArticleEntity articleDTOToEntity(ArticleDTO articleDTO) {
-        return ArticleEntity.builder()
-                .id(articleDTO.getId())
-                .author(articleDTO.getAuthor())
-                .articleTitle(articleDTO.getArticleTitle())
-                .articleBody(articleDTO.getArticleBody())
-                .createDate(articleDTO.getCreateDate())
-                .editedDate(articleDTO.getEditedDate())
-                .visible(articleDTO.getVisible())
-                .build();
+        if (articleDTO.getId() != null) {
+            return ArticleEntity.builder()
+                    .id(articleDTO.getId())
+                    .author(articleDTO.getAuthor())
+                    .articleTitle(articleDTO.getArticleTitle())
+                    .articleBody(articleDTO.getArticleBody())
+                    .createDate(LocalDateTime.now())
+                    .visible(articleDTO.getVisible())
+                    .build();
+        } else {
+            return ArticleEntity.builder()
+                    .author(articleDTO.getAuthor())
+                    .articleTitle(articleDTO.getArticleTitle())
+                    .articleBody(articleDTO.getArticleBody())
+                    .createDate(LocalDateTime.now())
+                    .visible(articleDTO.getVisible())
+                    .build();
+        }
     }
 
     @Override

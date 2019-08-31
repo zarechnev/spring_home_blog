@@ -1,5 +1,6 @@
 package org.zarechnev.blog.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -16,6 +17,12 @@ import static org.zarechnev.blog.constant.ControllerPathURLs.*;
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+
+    @Value("${blogAdmin.login}")
+    private String adminLogin;
+
+    @Value("${blogAdmin.pass}")
+    private String adminPass;
 
      // TODO Необходимо логировать процесс входа и выхода пользователя на сайт
     @Override
@@ -48,8 +55,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public UserDetailsService userDetailsService() {
         UserDetails user =
                 User.withDefaultPasswordEncoder()
-                        .username("user")
-                        .password("password")
+                        .username(adminLogin)
+                        .password(adminPass)
                         .roles("USER")
                         .build();
 
