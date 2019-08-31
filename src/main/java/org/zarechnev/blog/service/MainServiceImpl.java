@@ -58,11 +58,16 @@ public class MainServiceImpl implements MainService {
 
     @Override
     public List<ArticleDTO> getListArticlesToMainPage() {
-        List<ArticleEntity> articleEntity = new ArrayList<>();
+        List<ArticleDTO> articleDTOList = new ArrayList<>();
         for (ArticleEntity articleEnt : articleRepository.findAll()) {
-            articleEntity.add(articleEnt);
+            ArticleDTO articleDTO = articleDTOEntityConverter.articleEntityToDTO(articleEnt);
+            articleDTO.setAbstraction(renderedArticleRepository.findByArticleId(articleEnt.getId())
+                    .get()
+                    .getArticleBodyInHTML()
+                    .substring(0, 400) + " ...");
+            articleDTOList.add(articleDTO);
         }
-        return articleDTOEntityConverter.articleEntityToDTO(articleEntity);
+        return articleDTOList;
     }
 
     @Override

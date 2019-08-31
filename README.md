@@ -34,5 +34,3 @@ This project uses
 - authorization
 - admin page for users
 - admin page for articles
-- markdown support (?)
-- ~~html base template for extends in pages~~
