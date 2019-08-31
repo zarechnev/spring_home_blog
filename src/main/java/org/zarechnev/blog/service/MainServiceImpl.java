@@ -25,11 +25,34 @@ public class MainServiceImpl implements MainService {
     private ArticleRepository articleRepository;
     @Autowired
     private RenderedArticleRepository renderedArticleRepository;
+    @Autowired
+    private HTMLRenderFromMarkDownServiceImpl htmlRenderFromMarkDownService;
 
     @Override
     public ArticleDTO getSpecificArticleToMainPage(Long articleId) {
-        ArticleDTO articleDTO = articleDTOEntityConverter.articleEntityToDTO(articleRepository.findById(articleId).get());
-        articleDTO.setArticleBody(renderedArticleRepository.findByArticleId(articleId).getArticleBodyInHTML());
+        ArticleDTO articleDTO = articleDTOEntityConverter.articleEntityToDTO(articleRepository.findById(articleId)
+                .get());
+
+        String articleBodyInHTML;
+
+        if (!renderedArticleRepository.findByArticleId(articleId).isPresent()) {
+            String articleBodyInMarkDown = articleDTO.getArticleBody();
+            articleBodyInHTML = htmlRenderFromMarkDownService.getHTML(articleBodyInMarkDown);
+
+            RenderedArticleEntity renderedArticleEntity = RenderedArticleEntity.builder()
+                    .articleId(articleId)
+                    .articleBodyInHTML(articleBodyInHTML)
+                    .build();
+
+            renderedArticleRepository.save(renderedArticleEntity);
+        } else {
+            articleBodyInHTML = renderedArticleRepository.findByArticleId(articleId)
+                    .get()
+                    .getArticleBodyInHTML();
+        }
+
+        articleDTO.setArticleBody(articleBodyInHTML);
+
         return articleDTO;
     }
 
@@ -45,12 +68,9 @@ public class MainServiceImpl implements MainService {
     @Override
     public void addArticle(ArticleDTO articleDTO) {
         ArticleEntity articleEntity = articleRepository.save(articleDTOEntityConverter.articleDTOToEntity(articleDTO));
-        Parser parser = Parser.builder().build();
-        Node document = parser.parse(articleEntity.getArticleBody());
-        HtmlRenderer renderer = HtmlRenderer.builder().build();
-        String s = renderer.render(document);
+
         RenderedArticleEntity renderedArticleEntity = RenderedArticleEntity.builder()
-                .articleBodyInHTML(s)
+                .articleBodyInHTML(htmlRenderFromMarkDownService.getHTML(articleEntity.getArticleBody()))
                 .articleId(articleEntity.getId())
                 .build();
         renderedArticleRepository.save(renderedArticleEntity);

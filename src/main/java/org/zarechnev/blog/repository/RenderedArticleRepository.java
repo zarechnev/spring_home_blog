@@ -2,8 +2,10 @@ package org.zarechnev.blog.repository;
 
 import org.springframework.data.repository.PagingAndSortingRepository;
 
+import java.util.Optional;
+
 public interface RenderedArticleRepository extends PagingAndSortingRepository<RenderedArticleEntity, Long> {
 
-    RenderedArticleEntity findByArticleId(Long articleId);
+    Optional<RenderedArticleEntity> findByArticleId(Long articleId);
 
 }
