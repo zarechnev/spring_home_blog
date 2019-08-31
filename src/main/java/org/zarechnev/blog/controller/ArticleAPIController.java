@@ -29,15 +29,15 @@ public class ArticleAPIController {
     MainServiceImpl mainService;
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody
-    ResponseEntity<Object> allArticlesInJson(HttpServletRequest request) {
+    @ResponseBody
+    public ResponseEntity<Object> allArticlesInJson(HttpServletRequest request) {
         log.info(LOGGING_CLIENT_INFO, request.getRemoteAddr(), request.getRequestURL());
         return new ResponseEntity<>(mainService.getListArticlesToMainPage(), HttpStatus.OK);
     }
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody
-    ResponseEntity<Object> articleByIdInJson(HttpServletRequest request, @PathVariable("id") long id) {
+    @ResponseBody
+    public ResponseEntity<Object> articleByIdInJson(HttpServletRequest request, @PathVariable("id") long id) {
         ArticleDTO article = mainService.getSpecificArticleToMainPage(id);
         if (article == null) {
             log.warn(LOGGING_MISSING_PAGE_WARN, request.getRemoteAddr(), request.getRequestURL());
@@ -86,8 +86,8 @@ public class ArticleAPIController {
      * }
      */
     @PutMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody
-    String updateArticle(HttpServletRequest request, @PathVariable("id") long id, @RequestBody String articleInJson) {
+    @ResponseBody
+    public String updateArticle(HttpServletRequest request, @PathVariable("id") long id, @RequestBody String articleInJson) {
         log.info(LOGGING_CLIENT_INFO, request.getRemoteAddr(), request.getRequestURL());
 
         JsonNode jsonNode;
