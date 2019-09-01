@@ -4,11 +4,22 @@
 <body>
 <th:block th:include="~{fragments/navigation :: navigation}"></th:block>
 <div class="container">
-    <h2>Хобби, увлечения, статьи</h2>
-    <hr>
-    <h2 style="font-size:35px;" th:text="${article.getArticleTitle()}">article title</h2>
-    <p th:utext="${article.getArticleBody()}">shot top part of article</p>
+    <div class="row">
+        <div class="col">
+            <h3>Хобби, увлечения, статьи</h3>
+            <hr>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <h2 style="font-size:35px;" th:text="${article.getArticleTitle()}">article title</h2>
+            <p th:utext="${article.getArticleBody()}">shot top part of article</p>
+        </div>
+        <div class="col-3">
+            <th:block th:include="~{fragments/about_me :: about_me}"></th:block>
+        </div>
+    </div>
+    <div th:include="~{fragments/bottom :: bottom}"></div>
 </div>
-<div th:include="~{fragments/bottom :: bottom}"></div>
 </body>
 </html>
