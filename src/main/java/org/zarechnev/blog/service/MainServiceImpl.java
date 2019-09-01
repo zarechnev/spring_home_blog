@@ -61,10 +61,15 @@ public class MainServiceImpl implements MainService {
         List<ArticleDTO> articleDTOList = new ArrayList<>();
         for (ArticleEntity articleEnt : articleRepository.findAll()) {
             ArticleDTO articleDTO = articleDTOEntityConverter.articleEntityToDTO(articleEnt);
-            articleDTO.setAbstraction(renderedArticleRepository.findByArticleId(articleEnt.getId())
+
+            String articleBody = renderedArticleRepository.findByArticleId(articleEnt.getId())
                     .get()
-                    .getArticleBodyInHTML()
-                    .substring(0, 400) + " ...");
+                    .getArticleBodyInHTML();
+
+            String articleAbstraction = articleBody.substring(0, Math.min(articleBody.length(), 400)
+                    ) + " ...";
+
+            articleDTO.setAbstraction(articleAbstraction);
             articleDTOList.add(articleDTO);
         }
         return articleDTOList;

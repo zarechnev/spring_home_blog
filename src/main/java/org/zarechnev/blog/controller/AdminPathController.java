@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.zarechnev.blog.repository.SectionRepository;
 import org.zarechnev.blog.repository.ArticleRepository;
+import org.zarechnev.blog.service.MainServiceImpl;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -22,7 +23,7 @@ import static org.zarechnev.blog.constant.LoggingConstant.LOGGING_CLIENT_INFO;
 public class AdminPathController {
 
     @Autowired
-    private ArticleRepository msgRepo;
+    private MainServiceImpl mainService;
 
     @Autowired
     private SectionRepository articleSectionRepo;
@@ -40,7 +41,7 @@ public class AdminPathController {
     @GetMapping(ARTICLE_URL_PATH)
     public String adminArticlesPage(HttpServletRequest request, Map<String, Object> model) {
         log.info(LOGGING_CLIENT_INFO, request.getRemoteAddr(), request.getRequestURL());
-        model.put("articles", msgRepo.findAll());
+        model.put("articles", mainService.getListArticlesToMainPage());
         model.put("articleUrlPath", ARTICLE_URL_PATH);
         model.put("siteUrl", env.getProperty(SITE_URL_PROPERTY));
 
@@ -51,7 +52,7 @@ public class AdminPathController {
     @GetMapping(USER_URL_PATH)
     public String adminUsersPage(HttpServletRequest request, Map<String, Object> model) {
         log.info(LOGGING_CLIENT_INFO, request.getRemoteAddr(), request.getRequestURL());
-        model.put("articles", msgRepo.findAll());
+        model.put("articles", mainService.getListArticlesToMainPage());
         model.put("articleUrlPath", ARTICLE_URL_PATH);
         model.put("siteUrl", env.getProperty(SITE_URL_PROPERTY));
 

@@ -12,8 +12,12 @@
                 <div class="col">
 
                     <div class="alert alert-light" role="alert">
-                        <button type="button" class="btn btn-success my-2 my-sm-0 btn-sm" @click="showAddArticleForm()" id="add_article_btn">Добавить</button>
-                        <button type="button" class="btn btn-info my-2 my-sm-0 btn-sm" @click="editArticleButtonClick()">Редактировать</button>
+                        <button type="button" class="btn btn-success my-2 my-sm-0 btn-sm" @click="showAddArticleForm()"
+                                id="add_article_btn">Добавить
+                        </button>
+                        <button type="button" class="btn btn-info my-2 my-sm-0 btn-sm"
+                                @click="editArticleButtonClick()">Редактировать
+                        </button>
                         <button type="button" class="btn btn-danger my-2 my-sm-0 btn-sm">Удалить</button>
                         <button type="button" class="btn btn-info my-2 my-sm-0 btn-sm">Комментарии</button>
                     </div>
@@ -24,7 +28,7 @@
                             <th></th>
                             <th>Название</th>
                             <th>Публикация</th>
-                            <th>Раздел</th>
+                            <th>Дата создания</th>
                             <th>Просмотров</th>
                             <th>Комментариев</th>
                         </tr>
@@ -32,17 +36,15 @@
 
                         <th:block th:each="article: ${articles}">
                             <tr>
-                                <td><input type="checkbox" th:id="articleCheckBox+${article.getId()}" ></td>
+                                <td><input type="checkbox" th:id="articleCheckBox+${article.getId()}"></td>
                                 <td>
                                     <a th:href="${siteUrl}+${articleUrlPath}+'/'+${article.getId()}" rel="bookmark">
-                                        <!--<span th:text="${article.getArticleTitle()}">article title</span>-->
-                                        <span>article title</span>
+                                        <span th:text="${article.getArticleTitle()}">article title</span>
                                     </a>
                                 </td>
                                 <td><input type="checkbox"></td>
                                 <td>
-                                    <!--<span th:text="${article.getLastEditedDatetime()}">last edit article date</span>-->
-                                    <span>last edit article date</span>
+                                    <span th:text="${article.getCreatedDatetime()}">created article date</span>
                                 </td>
                                 <td>31</td>
                                 <td>31/<b>43</b></td>
@@ -61,7 +63,9 @@
                             <textarea class="form-control" id="formArticleBody" rows="3"></textarea>
                         </div>
                         <div class="alert alert-light" role="alert">
-                            <button @click="addArticleButtonClick()" type="button" class="btn btn-success my-2 my-sm-0 btn-sm">Сохранить</button>
+                            <button @click="addArticleButtonClick()" type="button"
+                                    class="btn btn-success my-2 my-sm-0 btn-sm">Сохранить
+                            </button>
                         </div>
                     </form>
                 </div>
