@@ -24,27 +24,27 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Value("${blogAdmin.pass}")
     private String adminPass;
 
-     // TODO Необходимо логировать процесс входа и выхода пользователя на сайт
+    // TODO Необходимо логировать процесс входа и выхода пользователя на сайт
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                    .antMatchers(
-                            ROOT_URL_PATH,
-                            ARTICLE_URL_PATH_PATTERN,
-                            CSS_URL_PATH_PATTERN,
-                            JS_URL_PATH_PATTERN
-                    ).permitAll()
-                    .anyRequest().authenticated()
+                .antMatchers(
+                        ROOT_URL_PATH,
+                        ARTICLE_URL_PATH_PATTERN,
+                        CSS_URL_PATH_PATTERN,
+                        JS_URL_PATH_PATTERN
+                ).permitAll()
+                .anyRequest().authenticated()
                 .and()
-                    .formLogin()
-                    .loginPage(LOGIN_URL_PATH)
-                    .permitAll()
+                .formLogin()
+                .loginPage(LOGIN_URL_PATH)
+                .permitAll()
                 .and()
-                    .logout()
-                    .logoutUrl(LOGOUT_URL_PATH)
-                    .logoutSuccessUrl(ROOT_URL_PATH)
-                    .permitAll();
+                .logout()
+                .logoutUrl(LOGOUT_URL_PATH)
+                .logoutSuccessUrl(ROOT_URL_PATH)
+                .permitAll();
 
         http.csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
     }

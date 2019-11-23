@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:include="~{fragments/top :: top}"></head>
 <body>
 <th:block th:include="~{fragments/navigation :: navigation}"></th:block>
@@ -28,7 +28,7 @@
                             <th></th>
                             <th>Название</th>
                             <th>Публикация</th>
-                            <th>Дата создания</th>
+                            <th>Раздел</th>
                             <th>Просмотров</th>
                             <th>Комментариев</th>
                         </tr>
@@ -39,12 +39,14 @@
                                 <td><input type="checkbox" th:id="articleCheckBox+${article.getId()}"></td>
                                 <td>
                                     <a th:href="${siteUrl}+${articleUrlPath}+'/'+${article.getId()}" rel="bookmark">
-                                        <span th:text="${article.getArticleTitle()}">article title</span>
+                                        <!--<span th:text="${article.getArticleTitle()}">article title</span>-->
+                                        <span>article title</span>
                                     </a>
                                 </td>
                                 <td><input type="checkbox"></td>
                                 <td>
-                                    <span th:text="${article.getCreatedDatetime()}">created article date</span>
+                                    <!--<span th:text="${article.getLastEditedDatetime()}">last edit article date</span>-->
+                                    <span>last edit article date</span>
                                 </td>
                                 <td>31</td>
                                 <td>31/<b>43</b></td>
