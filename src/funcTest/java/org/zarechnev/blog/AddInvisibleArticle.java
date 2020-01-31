@@ -23,7 +23,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class AddVisibleArticle {
+public class AddInvisibleArticle {
 
     @Autowired
     WebApplicationContext wac;
@@ -38,7 +38,7 @@ public class AddVisibleArticle {
                 .author("authoRR")
                 .articleBody("An h1 header\\n============\\n\\nParagraphs are separated by a blank line.\\n\\n2nd paragraph. *Italic*, **bold**, and `monospace`.")
                 .articleTitle("titlEE")
-                .isVisible(true)
+                .isVisible(false)
                 .build();
 
         String articleInJSON = mapper.writeValueAsString(article);
@@ -91,7 +91,7 @@ public class AddVisibleArticle {
                 .getContentAsString();
 
         // then
-        assertTrue(response.contains("<p><p>An h1 header\\n============\\n\\nParagraphs are separated by a blank line.\\n\\n2nd paragraph. <em>Italic</em>, <strong>bold</st ...</p>"));
+        assertFalse(response.contains("<p><p>An h1 header\\n============\\n\\nParagraphs are separated by a blank line.\\n\\n2nd paragraph. <em>Italic</em>, <strong>bold</st ...</p>"));
     }
 
     @Test
@@ -102,16 +102,10 @@ public class AddVisibleArticle {
         Long articleId = articleFromResponse.getId();
         String articleUrl = "/article/" + articleId;
 
-        // when
-        String response = mockMvc.perform(get(articleUrl))
-                .andDo(print())
-                .andExpect(status().isOk())
-                .andReturn()
-                .getResponse()
-                .getContentAsString();
-
         // then
-        assertTrue(response.contains("<p><p>An h1 header\\n============\\n\\nParagraphs are separated by a blank line.\\n\\n2nd paragraph. <em>Italic</em>, <strong>bold</strong>, and <code>monospace</code>.</p>"));
+        mockMvc.perform(get(articleUrl))
+                .andDo(print())
+                .andExpect(status().isNotFound());
     }
 
     @Test
