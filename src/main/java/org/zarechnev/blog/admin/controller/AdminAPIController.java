@@ -1,10 +1,10 @@
-package org.zarechnev.blog.feature.admin.controller;
+package org.zarechnev.blog.admin.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import org.zarechnev.blog.feature.admin.dto.ArticleFullDTO;
-import org.zarechnev.blog.feature.admin.service.AdminAPIService;
+import org.zarechnev.blog.admin.dto.ArticleFullDTO;
+import org.zarechnev.blog.admin.service.AdminAPIService;
 
 import static org.zarechnev.blog.constant.ControllerPathURLs.API_URL_PATH;
 import static org.zarechnev.blog.constant.ControllerPathURLs.ARTICLE_URL_PATH;

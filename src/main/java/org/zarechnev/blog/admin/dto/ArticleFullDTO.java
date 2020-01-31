@@ -1,4 +1,4 @@
-package org.zarechnev.blog.feature.admin.dto;
+package org.zarechnev.blog.admin.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

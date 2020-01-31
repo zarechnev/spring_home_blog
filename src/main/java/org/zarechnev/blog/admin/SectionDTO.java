@@ -1,4 +1,4 @@
-package org.zarechnev.blog.feature.admin;
+package org.zarechnev.blog.admin;
 
 import lombok.Builder;
 import lombok.Data;

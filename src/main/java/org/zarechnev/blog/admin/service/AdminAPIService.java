@@ -1,6 +1,6 @@
-package org.zarechnev.blog.feature.admin.service;
+package org.zarechnev.blog.admin.service;
 
-import org.zarechnev.blog.feature.admin.dto.ArticleFullDTO;
+import org.zarechnev.blog.admin.dto.ArticleFullDTO;
 
 public interface AdminAPIService {
 

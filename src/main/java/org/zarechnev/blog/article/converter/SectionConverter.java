@@ -1,6 +1,6 @@
-package org.zarechnev.blog.feature.article.converter;
+package org.zarechnev.blog.article.converter;
 
-import org.zarechnev.blog.feature.article.SectionDTO;
+import org.zarechnev.blog.article.SectionDTO;
 import org.zarechnev.blog.model.ArticlesSection;
 
 import java.util.List;

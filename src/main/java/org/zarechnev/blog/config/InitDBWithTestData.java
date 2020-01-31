@@ -3,8 +3,8 @@ package org.zarechnev.blog.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
-import org.zarechnev.blog.feature.admin.dto.ArticleFullDTO;
-import org.zarechnev.blog.feature.admin.service.AdminAPIService;
+import org.zarechnev.blog.admin.dto.ArticleFullDTO;
+import org.zarechnev.blog.admin.service.AdminAPIService;
 
 @Component
 public class InitDBWithTestData {

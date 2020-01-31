@@ -1,10 +1,10 @@
-package org.zarechnev.blog.feature.admin.service.converter;
+package org.zarechnev.blog.admin.service.converter;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.zarechnev.blog.feature.admin.dto.ArticleDTO;
-import org.zarechnev.blog.feature.admin.dto.ArticleFullDTO;
+import org.zarechnev.blog.admin.dto.ArticleDTO;
+import org.zarechnev.blog.admin.dto.ArticleFullDTO;
 import org.zarechnev.blog.model.Article;
 
 import java.util.List;

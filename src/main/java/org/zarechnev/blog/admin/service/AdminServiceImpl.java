@@ -1,11 +1,11 @@
-package org.zarechnev.blog.feature.admin.service;
+package org.zarechnev.blog.admin.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.zarechnev.blog.admin.dto.ArticleDTO;
+import org.zarechnev.blog.admin.dto.ArticleFullDTO;
+import org.zarechnev.blog.admin.service.converter.AdminArticleConverter;
 import org.zarechnev.blog.exception.ResourceNotFound;
-import org.zarechnev.blog.feature.admin.dto.ArticleDTO;
-import org.zarechnev.blog.feature.admin.dto.ArticleFullDTO;
-import org.zarechnev.blog.feature.admin.service.converter.AdminArticleConverter;
 import org.zarechnev.blog.model.Article;
 import org.zarechnev.blog.repository.ArticleRepository;
 

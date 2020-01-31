@@ -1,4 +1,4 @@
-package org.zarechnev.blog.feature.article.dto;
+package org.zarechnev.blog.admin.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -15,6 +15,6 @@ public class ArticleDTO {
     Long id;
     String author;
     String articleTitle;
-    LocalDateTime createdDatedTime;
-    String abstraction;
+    LocalDateTime createdDateTime;
+    Boolean isVisible;
 }
