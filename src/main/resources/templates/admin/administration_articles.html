@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:include="~{fragments/top :: top}"></head>
 <body>
 <th:block th:include="~{fragments/navigation :: navigation}"></th:block>
@@ -12,8 +12,12 @@
                 <div class="col">
 
                     <div class="alert alert-light" role="alert">
-                        <button type="button" class="btn btn-success my-2 my-sm-0 btn-sm" @click="showAddArticleForm()" id="add_article_btn">Добавить</button>
-                        <button type="button" class="btn btn-info my-2 my-sm-0 btn-sm" @click="editArticleButtonClick()">Редактировать</button>
+                        <button type="button" class="btn btn-success my-2 my-sm-0 btn-sm" @click="showAddArticleForm()"
+                                id="add_article_btn">Добавить
+                        </button>
+                        <button type="button" class="btn btn-info my-2 my-sm-0 btn-sm"
+                                @click="editArticleButtonClick()">Редактировать
+                        </button>
                         <button type="button" class="btn btn-danger my-2 my-sm-0 btn-sm">Удалить</button>
                         <button type="button" class="btn btn-info my-2 my-sm-0 btn-sm">Комментарии</button>
                     </div>
@@ -32,7 +36,7 @@
 
                         <th:block th:each="article: ${articles}">
                             <tr>
-                                <td><input type="checkbox" th:id="articleCheckBox+${article.getId()}" ></td>
+                                <td><input type="checkbox" th:id="articleCheckBox+${article.getId()}"></td>
                                 <td>
                                     <a th:href="${siteUrl}+${articleUrlPath}+'/'+${article.getId()}" rel="bookmark">
                                         <!--<span th:text="${article.getArticleTitle()}">article title</span>-->
@@ -61,7 +65,9 @@
                             <textarea class="form-control" id="formArticleBody" rows="3"></textarea>
                         </div>
                         <div class="alert alert-light" role="alert">
-                            <button @click="addArticleButtonClick()" type="button" class="btn btn-success my-2 my-sm-0 btn-sm">Сохранить</button>
+                            <button @click="addArticleButtonClick()" type="button"
+                                    class="btn btn-success my-2 my-sm-0 btn-sm">Сохранить
+                            </button>
                         </div>
                     </form>
                 </div>

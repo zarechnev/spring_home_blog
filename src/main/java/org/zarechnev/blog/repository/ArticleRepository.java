@@ -1,6 +1,13 @@
 package org.zarechnev.blog.repository;
 
 import org.springframework.data.repository.PagingAndSortingRepository;
+import org.zarechnev.blog.model.Article;
 
-public interface ArticleRepository extends PagingAndSortingRepository<ArticleEntity, Long> {
+import java.util.List;
+
+public interface ArticleRepository extends PagingAndSortingRepository<Article, Long> {
+
+    List<Article> findAll();
+
+    List<Article> findByIsVisibleTrue();
 }
