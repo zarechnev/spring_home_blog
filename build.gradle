@@ -13,24 +13,37 @@ repositories {
 }
 
 dependencies {
-	compile 'com.atlassian.commonmark:commonmark:0.13.0'
 	compile 'org.springframework.boot:spring-boot-starter-data-jpa'
 	compile 'org.springframework.boot:spring-boot-starter-test'
 	compile 'org.springframework.boot:spring-boot-starter-web'
 	compile 'org.springframework.boot:spring-boot-starter-security'
 	compile 'org.springframework.boot:spring-boot-starter-thymeleaf'
+
+	compile 'com.atlassian.commonmark:commonmark:0.13.0'
+
 	compile 'com.fasterxml.jackson.core:jackson-databind:2.10.1'
 	compile 'com.fasterxml.jackson.module:jackson-module-parameter-names'
 	compile 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
+
 	compile 'org.modelmapper.extensions:modelmapper-spring:2.3.5'
+
 	compile 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5:3.0.4.RELEASE'
+
 	compile 'org.apache.logging.log4j:log4j-core:2.12.1'
 	compile 'org.apache.logging.log4j:log4j-api:2.12.1'
+
 	compile 'com.h2database:h2:1.4.200'
+
 	compile 'org.postgresql:postgresql:42.2.8'
+	
 	compile 'org.codehaus.groovy:groovy-all:2.5.7'
+
+	implementation 'org.mapstruct:mapstruct:1.4.1.Final'
+	annotationProcessor 'org.mapstruct:mapstruct-processor:1.4.1.Final'
+
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
+
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
