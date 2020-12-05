@@ -10,7 +10,7 @@ public interface AdminArticleConverter {
 
     ArticleFullDTO entityToFullDTO(Article article);
 
-    List<ArticleDTO> entityToDTO(List<Article> articles);
+    List<ArticleDTO> entityToDTO(Iterable<Article> articles);
 
     Article DTOToEntity(ArticleFullDTO articleDTO);
 }
