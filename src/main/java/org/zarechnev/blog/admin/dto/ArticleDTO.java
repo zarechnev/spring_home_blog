@@ -12,9 +12,9 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ArticleDTO {
-    Long id;
-    String author;
-    String articleTitle;
-    LocalDateTime createdDateTime;
-    Boolean isVisible;
+    private Long id;
+    private String author;
+    private String articleTitle;
+    private LocalDateTime createdDateTime;
+    private Boolean isVisible;
 }

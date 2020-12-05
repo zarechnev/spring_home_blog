@@ -12,11 +12,11 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ArticleFullDTO {
-    Long id;
-    String author;
-    String articleTitle;
-    LocalDateTime createdDateTime;
-    Boolean isVisible;
-    String articleBody;
-    String articleHTMLBody;
+    private Long id;
+    private String author;
+    private String articleTitle;
+    private LocalDateTime createdDateTime;
+    private Boolean isVisible;
+    private String articleBody;
+    private String articleHTMLBody;
 }

@@ -26,9 +26,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class AddVisibleArticle {
 
     @Autowired
-    WebApplicationContext wac;
+    private WebApplicationContext wac;
     @Autowired
-    ArticleRepository articleRepository;
+    private ArticleRepository articleRepository;
 
     private ObjectMapper mapper = new ObjectMapper();
     private MockMvc mockMvc;

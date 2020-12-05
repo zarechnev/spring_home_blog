@@ -12,9 +12,9 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ArticleFullDTO {
-    Long id;
-    String author;
-    String articleTitle;
-    LocalDateTime createdDatedTime;
-    String articleHTMLBody;
+    private Long id;
+    private String author;
+    private String articleTitle;
+    private LocalDateTime createdDatedTime;
+    private String articleHTMLBody;
 }
