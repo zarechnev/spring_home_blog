@@ -9,6 +9,7 @@ import org.zarechnev.blog.model.Article;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @Service
 public class AdminArticleConverterImpl implements AdminArticleConverter {
@@ -27,8 +28,8 @@ public class AdminArticleConverterImpl implements AdminArticleConverter {
     }
 
     @Override
-    public List<ArticleDTO> entityToDTO(List<Article> articles) {
-        return articles.stream()
+    public List<ArticleDTO> entityToDTO(Iterable<Article> articles) {
+        return StreamSupport.stream(articles.spliterator(), false)
                 .map(this::entityToDTO)
                 .collect(Collectors.toList());
     }

@@ -1,16 +1,12 @@
 plugins {
 	id 'java'
-	id 'jacoco'
-	id 'org.springframework.boot' version '2.1.5.RELEASE'
-}
-
-jacoco {
-	toolVersion = '0.8.2'
+	id 'org.springframework.boot' version '2.3.0.RELEASE'
+	id 'io.spring.dependency-management' version '1.0.9.RELEASE'
 }
 
 group = 'org.zarechnev.blog'
 version = '0.1'
-sourceCompatibility = 1.8
+sourceCompatibility = '14'
 
 repositories {
 	mavenCentral()
@@ -18,26 +14,28 @@ repositories {
 
 dependencies {
 	compile 'com.atlassian.commonmark:commonmark:0.13.0'
-	compile 'org.springframework.boot:spring-boot-starter-data-jpa:2.1.5.RELEASE'
-	compile 'org.springframework.boot:spring-boot-starter-test:2.1.5.RELEASE'
-	compile 'org.springframework.boot:spring-boot-starter-web:2.1.5.RELEASE'
-	compile 'org.springframework.boot:spring-boot-starter-security:2.1.5.RELEASE'
-	compile 'org.springframework.boot:spring-boot-starter-thymeleaf:2.1.5.RELEASE'
-	compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.10.1'
-	compile group: 'com.fasterxml.jackson.module', name: 'jackson-module-parameter-names', version: '2.10.1'
-	compile group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jdk8', version: '2.10.1'
-	compile group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr310', version: '2.10.1'
-	compile group: 'org.modelmapper.extensions', name: 'modelmapper-spring', version: '2.3.5'
-	compile group: 'org.thymeleaf.extras', name: 'thymeleaf-extras-springsecurity5', version: '3.0.4.RELEASE'
-	compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.12.1'
-	compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.12.1'
-	compile group: 'com.h2database', name: 'h2', version: '1.4.200'
-	compile group: 'org.postgresql', name: 'postgresql', version: '42.2.8'
-	compile "org.codehaus.groovy:groovy-all:2.5.7"
-	compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.10'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test:2.1.5.RELEASE'
-	testCompile group: 'org.springframework.security', name: 'spring-security-test', version: '5.2.1.RELEASE'
-	testCompile group: 'junit', name: 'junit', version: '4.4'
+	compile 'org.springframework.boot:spring-boot-starter-data-jpa'
+	compile 'org.springframework.boot:spring-boot-starter-test'
+	compile 'org.springframework.boot:spring-boot-starter-web'
+	compile 'org.springframework.boot:spring-boot-starter-security'
+	compile 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	compile 'com.fasterxml.jackson.core:jackson-databind:2.10.1'
+	compile 'com.fasterxml.jackson.module:jackson-module-parameter-names'
+	compile 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
+	compile 'org.modelmapper.extensions:modelmapper-spring:2.3.5'
+	compile 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5:3.0.4.RELEASE'
+	compile 'org.apache.logging.log4j:log4j-core:2.12.1'
+	compile 'org.apache.logging.log4j:log4j-api:2.12.1'
+	compile 'com.h2database:h2:1.4.200'
+	compile 'org.postgresql:postgresql:42.2.8'
+	compile 'org.codehaus.groovy:groovy-all:2.5.7'
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.springframework.security:spring-security-test'
+	testImplementation('org.springframework.boot:spring-boot-starter-test') {
+		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+	}
 }
 
 sourceSets {
@@ -61,12 +59,6 @@ task funcTest(type: Test) {
 	classpath = sourceSets.funcTest.runtimeClasspath
 }
 
-jacocoTestReport {
-	reports {
-		xml.enabled = true
-	}
-}
-
-task wrapper(type: Wrapper) {
-    gradleVersion = '4.10.2'
+test {
+	useJUnitPlatform()
 }

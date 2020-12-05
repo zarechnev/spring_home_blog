@@ -3,10 +3,10 @@ package org.zarechnev.blog.article;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.zarechnev.blog.exception.ResourceNotFound;
 import org.zarechnev.blog.article.converter.ArticleConverter;
 import org.zarechnev.blog.article.dto.ArticleDTO;
 import org.zarechnev.blog.article.dto.ArticleFullDTO;
+import org.zarechnev.blog.exception.ResourceNotFound;
 import org.zarechnev.blog.model.Article;
 import org.zarechnev.blog.repository.ArticleRepository;
 
